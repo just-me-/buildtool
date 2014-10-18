@@ -7,8 +7,8 @@
         <packagedescription><![CDATA[Guild Wars 2 Buildsearch]]></packagedescription>
         <packagedescription language="de"><![CDATA[Guild Wars 2 Buildsuche]]></packagedescription>
         <packagedescription language="de-informal"><![CDATA[Guild Wars 2 Buildsuche]]></packagedescription>
-        <version>1.0.10</version>
-        <date>2013-10-13</date>
+        <version>1.0.11</version>
+        <date>2014-10-18</date>
         <standalone>0</standalone>
         <isunique>1</isunique>
     </packageinformation>
@@ -21,23 +21,24 @@
         <requiredpackage minversion="1.1.4">com.woltlab.wcf</requiredpackage>
         <requiredpackage minversion="1.7.1" file="requirements/info.codingcorner.wcf.js.jquery-1.7.1.tar.gz">info.codingcorner.wcf.js.jquery</requiredpackage>
     </requiredpackages>
-
+    
     <instructions type="install">
         <languages languagecode="en">languages/en.xml</languages>
         <languages languagecode="de">languages/de.xml</languages>
         <languages languagecode="de-informal">languages/de-informal.xml</languages>
-        <files>files.tar</files>
-        <templates>templates.tar</templates>
-		<sql>install.sql</sql> <!-- Unnormalisierte 'Datenbank' zum Beginn -->
+        <instruction type="file">files.tar</instruction>
+        <instruction type="template">templates.tar</instruction>
+		<instructions type="sql">install.sql</instructions> <!-- Unnormalisierte 'Datenbank' zum Beginn -->
         <!-- <acptemplates>acptemplates.tar</acptemplates> -->
     </instructions>
-
+    
     <instructions type="update" fromversion="*">
         <languages languagecode="en">languages/en.xml</languages>
         <languages languagecode="de">languages/de.xml</languages>
         <languages languagecode="de-informal">languages/de-informal.xml</languages>
-        <files>files.tar</files>
-        <templates>templates.tar</templates>
+        <instructions type="files">files.tar</instructions>
+        <instructions type="templates">templates.tar</instructions>
         <!-- <acptemplates>acptemplates.tar</acptemplates> -->
     </instructions>
+
 </package>
