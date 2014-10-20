@@ -1,6 +1,7 @@
 <?php
 // wcf imports
-require_once(WCF_DIR . 'lib/page/AbstractPage.class.php');
+namespace wcf\page;
+use wcf\system\WCF;
 
 require_once('Gw2BuildsearchPage.class.php');
 require_once('Dropdown.class.php'); 
@@ -66,11 +67,12 @@ class BuildDatabase
 		}
 		$user = WCF::getUser()->username;
 		if($user == ""){ 
-			$admin = false;;
+			$admin = false;
 		}
 						
-		$result = $this->zugriff->sendQuery($sql);
-		while ($row = $this->zugriff->fetchArray($result)) {
+		$statement = $this->zugriff->prepareStatement($sql);
+		$statement->execute();
+		while ($row = $statement->fetchArray()) {
 			if(!empty( $row['haupthand'])){
 				$haupthandIcon = '<img title="' . $row['haupthand'] . '" src="wcf/icon/' . $row['haupthand'] . '.png" alt="' . $row['haupthand'] . '"</img>';
 			} else { $haupthandIcon = ""; }
@@ -134,7 +136,7 @@ class BuildDatabase
 					
 				<div id="build_' . $row['id'] . '" class="collapse">
 					<div id="build_' . $row['id'] . '_" class="gefundenerInhalt">
-						<form action="/index.php?page=Gw2Buildsearch" method="POST">
+						<form action="/index.php/Gw2Buildsearch/" method="POST">
 							<input class="hidden" name="thisBuildID" value="' . $row['id'] . '" readonly="readonly">
 							<div class="inhaltBeschreibung floatleft"><p><strong>Beschreibung: </strong>' . $row['beschreibung'] . '</p></div>
 							<div class="infoBox floatright">
@@ -173,7 +175,8 @@ class BuildDatabase
 		}
 		
 		$sql="SELECT * from gw2_buildsearch_builds WHERE autor = '" . $user . "'";
-		$result = $this->zugriff->sendQuery($sql);
+		$statement = $this->zugriff->prepareStatement($sql);
+		$statement->execute();
 		
 		/* tmp */
 		$arraySpielbereich = array(0 => 'WvW', 1 => 'PvE', 2 => 'sPvP');
@@ -192,7 +195,7 @@ class BuildDatabase
 		$createBegleithandOff = new Dropdown('Nebenwaffensatz - Begleithand', $arrayNebenhand);
 		/* tmp END */
 		$counter = 0;
-		while ($row = $this->zugriff->fetchArray($result)) {
+		while ($row = $statement->fetchArray()) {
 			$counter++;
 			
 			$classFile = $row['klasse'];
@@ -205,7 +208,7 @@ class BuildDatabase
 			
 			$builds .= '
 			<div class="gefundenerDatensatz">
-			 <form action="/index.php?page=Gw2Buildsearch" method="POST">
+			 <form action="/index.php/Gw2Buildsearch/" method="POST">
 				<input class="hidden" name="thisBuildID" value="' . $row['id'] . '" readonly="readonly">
 				<div class="gefundeneUeberschrift">
 					<div class="gedundenerTitel floatleft">
@@ -332,7 +335,8 @@ class BuildDatabase
 			INSERT INTO gw2_buildsearch_builds (spielbereich, buildauslegung, klasse, haupthand, begleithand, haupthandoff,  begleithandoff, titel, beschreibung, link, klicks, autor, erstellungsdatum) VALUES 
 			('". $spielbereich ."', '". $buildauslegung ."', '". $klasse ."', '". $haupthand ."', '". $begleithand ."', '". $haupthandOff ."', '". $begleithandOff ."', '". $titel ."', '". $beschreibung ."', '". $link ."', ". $klicks .", '". $autor ."', '". $erstellungsdatum ."')
 			";
-			$result = $this->zugriff->sendQuery($sql);
+			$statement = $this->zugriff->prepareStatement($sql);
+			$statement->execute();
 			return "Neues Build wurde erfolgreich erstellt."; 
 		}
 	}
@@ -347,8 +351,10 @@ class BuildDatabase
 			/* Testen, ob Ersteller == Updater ist; falls ja - dann aktualisieren. */
 			$sql="SELECT * from gw2_buildsearch_builds WHERE autor = '" . $user . "'";
 			$result = $this->zugriff->sendQuery($sql);
+			$statement = $this->zugriff->prepareStatement($sql);
+			$statement->execute();
 			$check = false;
-			while ($row = $this->zugriff->fetchArray($result)){
+			while ($row = $statement->fetchArray()){
 				if($row['id']=$_POST['thisBuildID']){
 					$check = true;
 				}
@@ -417,7 +423,8 @@ class BuildDatabase
 					haupthand = '". $haupthand ."', begleithand = '". $begleithand ."', haupthandoff = '". $haupthandOff ."',  begleithandoff = '". $begleithandOff ."', 
 					titel = '". $titel ."', beschreibung = '". $beschreibung ."', link = '". $link ."', erstellungsdatum = '". $erstellungsdatum ."'
 					WHERE id = " . $_POST["thisBuildID"];
-				$result = $this->zugriff->sendQuery($sql);
+				$statement = $this->zugriff->prepareStatement($sql);
+				$statement->execute();
 				return "Dein Build wurde erfolgreich editiert.";
 			}
 			else{ return "Das System hat Sie nicht als Autor erkennt. Es wurde keine Änderung vorgenommen.";} 
@@ -429,16 +436,18 @@ class BuildDatabase
 			if($user == ""){return "Das Anmelde-Session abgelaufen. Bitte anmelden.";}
 			
 			$sql="SELECT * from gw2_buildsearch_builds WHERE autor = '" . $user . "'";
-			$result = $this->zugriff->sendQuery($sql);
+			$statement = $this->zugriff->prepareStatement($sql);
+			$statement->execute();
 			$check = false;
-			while ($row = $this->zugriff->fetchArray($result)){
+			while ($row = $statement->fetchArray()){
 				if($row['id']=$_POST['thisBuildID']){
 					$check = true;
 				}
 			}
 			if($check == true){
 				$sql = "DELETE FROM gw2_buildsearch_builds WHERE id = " . $_POST["thisBuildID"];
-				$result = $this->zugriff->sendQuery($sql);
+				$statement = $this->zugriff->prepareStatement($sql);
+				$statement->execute();
 				return "Dein Build wurde erfolgreich gelöscht.";
 			}
 			else{ return "Das System hat Sie nicht als Autor erkennt. Es wurde keine Änderung vorgenommen.";}
@@ -461,7 +470,8 @@ class BuildDatabase
 			if($admin != true){ return "Sie sind kein Admin!";}
 			
 			$sql = "DELETE FROM gw2_buildsearch_builds WHERE id = " . $_POST["thisBuildID"];
-			$result = $this->zugriff->sendQuery($sql);
+			$statement = $this->zugriff->prepareStatement($sql);
+			$statement->execute();
 			return "Build Nr. " . $_POST["thisBuildID"] . " wurde erfolgreich gelöscht.";
 			
 		}

@@ -1,6 +1,7 @@
 <?php
 // wcf imports
-require_once(WCF_DIR . 'lib/page/AbstractPage.class.php');
+namespace wcf\page;
+use wcf\system\WCF;
 
 require_once('HtmlTag.class.php'); 
 require_once('Dropdown.class.php'); 
@@ -21,8 +22,9 @@ class Gw2BuildsearchPage extends AbstractPage
 	private $siteName="Gw2 Buildsuche";
 	private $siteBeschreibung="Realisation durch Merlin.6750/Marcel H.";
 	
-	public function __construct ()
-	{ 
+	public function readData() 
+	{
+        parent::readData(); 
 		$instanz = WCF::getTPL();
 		$instanz->assign('siteBeschreibung', $this -> siteBeschreibung);
 		$instanz->assign('siteName', $this -> siteName);
@@ -31,7 +33,6 @@ class Gw2BuildsearchPage extends AbstractPage
 		$this -> inhalt($instanz);
 		$this -> create($instanz);
 		$this -> edit($instanz);
-		parent::__construct();
 	}
 	
 	public function filter($instanz)
@@ -52,7 +53,7 @@ class Gw2BuildsearchPage extends AbstractPage
 		$filterBegleithand = new Dropdown('Begleithand', $arrayNebenhand);
 
 		$myFilter = '
-			<form action="/index.php?page=Gw2Buildsearch#myMain" method="POST">
+			<form action="/index.php/Gw2Buildsearch#myMain" method="POST">
 				<div id="filter_inhalt">
 				
 				'. $filterSpielbereich->getDropdown() .'
@@ -107,7 +108,7 @@ class Gw2BuildsearchPage extends AbstractPage
 		} 
 		
 		$myCreateForm = '
-			<form action="/index.php?page=Gw2Buildsearch" method="POST">
+			<form action="/index.php/Gw2Buildsearch/" method="POST">
 				<div class="createTitel">
 					<label>Kurzbeschreibung</label>
 					<input type="text" size="40" maxlength="45" name="createTitel" value="' . $valueTitel . '"> 
@@ -161,6 +162,23 @@ class Gw2BuildsearchPage extends AbstractPage
 		}
 		$instanz->assign('myChance', $myChance);
 	}
+	
+	public function assignVariables() {
+        parent::assignVariables();
+/*
+        WCF::getTPL()->assign(array(
+            'world' => $this->world,
+            'siteName' => $this->world,
+            'siteBeschreibung' => $this->world,
+            'userMessages' => $this->world,
+            'myChance' => $this->world,
+            'createBuild' => $this->world,
+            'editBuild' => $this->world,
+            'filter' => $this->world,
+            'datensatz' => $this->world
+        ));
+*/
+    }
 }
 
 

@@ -1,7 +1,4 @@
-DROP TABLE IF EXISTS gw2_buildsearch_builds;
-DROP TABLE IF EXISTS gw2_buildsearch_comment;
-
-CREATE TABLE IF NOT EXISTS gw2_buildsearch_builds(
+CREATE TABLE gw2_buildsearch_builds(
 	id int(10) UNSIGNED NOT NULL auto_increment,
 	spielbereich varchar(50),
 	buildauslegung varchar(50),

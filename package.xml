@@ -28,7 +28,7 @@
         <languages languagecode="de-informal">languages/de-informal.xml</languages>
         <instruction type="file">files.tar</instruction>
         <instruction type="template">templates.tar</instruction>
-		<instructions type="sql">install.sql</instructions> <!-- Unnormalisierte 'Datenbank' zum Beginn -->
+		<instruction type="sql">install.sql</instruction> <!-- Unnormalisierte 'Datenbank' zum Beginn -->
         <!-- <acptemplates>acptemplates.tar</acptemplates> -->
     </instructions>
     
@@ -36,8 +36,8 @@
         <languages languagecode="en">languages/en.xml</languages>
         <languages languagecode="de">languages/de.xml</languages>
         <languages languagecode="de-informal">languages/de-informal.xml</languages>
-        <instructions type="files">files.tar</instructions>
-        <instructions type="templates">templates.tar</instructions>
+        <instruction type="files">files.tar</instruction>
+        <instruction type="templates">templates.tar</instruction>
         <!-- <acptemplates>acptemplates.tar</acptemplates> -->
     </instructions>
 

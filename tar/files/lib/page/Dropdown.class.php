@@ -1,6 +1,7 @@
 <?php
 // wcf imports
-require_once(WCF_DIR . 'lib/page/AbstractPage.class.php');
+namespace wcf\page;
+use wcf\system\WCF;
 
 require_once('Gw2BuildsearchPage.class.php');
 require_once('HtmlTag.class.php'); 
@@ -20,7 +21,7 @@ class Dropdown
 	private $htmlOptions;
 	private $htmlTag; 
 	
-	public function __construct ($label, $arrayOptions)
+	public function __construct($label, $arrayOptions)
 	{
 		$this->label=$label; 
 		$this->arrayOptions=$arrayOptions;	
@@ -32,6 +33,7 @@ class Dropdown
 			<div class="filter_'. $this->label .' floatleft"><label class="clear">'. $this->label .'</label>
 			<select name="'. $this->label .'" onchange="this.form.submit()">
 			';
+		
 		foreach($this->arrayOptions as $myOption){ 
 			$selected = '';
 			if(!empty($_POST[$this->label]) && $_POST[$this->label] == $myOption){

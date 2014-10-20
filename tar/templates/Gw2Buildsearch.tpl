@@ -15,21 +15,18 @@
 		</script>
     </head>
     <body>
-        {include file='header' sandbox=false}
-		
+		{include file='header' sandbox=false}
         <div id="main">
-            <ul class="breadCrumbs">
-                <li><a href="index.php{@SID_ARG_1ST}"><img src="{icon}indexS.png{/icon}" alt="{lang}{PAGE_TITLE}{/lang}"/> <span>{lang}{PAGE_TITLE}{/lang}</span></a> &raquo;</li>
-            </ul>
+         <div>
             <div class="mainHeadline">
-                <img src="{icon}indexL.png{/icon}" alt=""/>
                 <div class="headlineContainer">
                     <h2>{$siteName}</h2>
                     <p>{$siteBeschreibung}</p>
                 </div>
-				
             </div>
+            
             {if $userMessages|isset}{@$userMessages}{/if}
+            
 			<div id="myMain">
 				{@$myChance}
 				<div id="actions">
@@ -160,9 +157,9 @@
 					{@$datensatz}
 				</div>
 			</div>
+		 </div>
         </div>
-		
-        {include file='footer' sandbox=false}
+		{include file='footer' sandbox=false}
 		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script src="wcf/bs/bootstrap.js" type="text/javascript"></script>
     </body>

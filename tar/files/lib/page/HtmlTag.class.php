@@ -1,6 +1,7 @@
 <?php
 // wcf imports
-require_once(WCF_DIR . 'lib/page/AbstractPage.class.php');
+namespace wcf\page;
+use wcf\system\WCF;
 
 require_once('Gw2BuildsearchPage.class.php');
 require_once('Dropdown.class.php'); 
