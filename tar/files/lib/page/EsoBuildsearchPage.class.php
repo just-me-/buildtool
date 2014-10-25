@@ -12,15 +12,15 @@ require_once('BuildValidate.class.php');
  * Guild Wars 2 Buildsearch
  *
  * @author       Marcel H. 
- * @copyright    2013 Marcel H. 
- * @package      net.poebel.gw2.buildsearch
+ * @copyright    2014 Marcel H. 
+ * @package      ch.merlin.eso.buildsearch
  */
-class Gw2BuildsearchPage extends AbstractPage
+class EsoBuildsearchPage extends AbstractPage
 {
-    public $templateName = 'Gw2Buildsearch';
+    public $templateName = 'EsoBuildsearch';
 	
-	private $siteName="Gw2 Buildsuche";
-	private $siteBeschreibung="Realisation durch Merlin.6750/Marcel H.";
+	private $siteName="ESO Buildsuche";
+	private $siteBeschreibung="Realisation durch @Just_Merlin/Marcel H.";
 	
 	public function readData() 
 	{
@@ -37,30 +37,25 @@ class Gw2BuildsearchPage extends AbstractPage
 	
 	public function filter($instanz)
 	{
-		$arraySpielbereich = array(0 => 'alle', 1 => 'WvW', 2 => 'PvE', 3 => 'sPvP');
-		$arrayBuildauslegung = array(0 => 'alle', 1 => 'Schaden', 2 => 'Support/Tank', 3 => 'Bi-Auslegung');
-		$arrayKlasse = array(0 => 'alle', 1 => 'Krieger', 2 => 'Wächter', 3 => 'Dieb', 4 => 'Ingenieur', 5 => 'Waldläufer', 6 => 'Elementarmagier', 7 => 'Mesmer', 8 => 'Nekromant');
-		$arrayHaupthand = array(0 => 'alle', 1 => 'Gewehr', 2 => 'Grossschwert', 3 => 'Hammer', 4 => 'Kurzbogen', 5 => 'Langbogen', 6 => 'Stab', 
-								7 => 'Axt', 8 => 'Dolch', 9 => 'Pistole', 10 => 'Schwert', 11 => 'Streitkolben', 
-								12 => 'Zepter');
-		$arrayNebenhand = array(0 => 'alle', 1 => 'Axt', 2 => 'Dolch', 3 => 'Pistole', 4 => 'Schwert', 5 => 'Streitkolben', 
-								6 => 'Fackel', 7 => 'Fokus', 8 => 'Kriegshorn', 9 => 'Schild');
+		$arraySpielbereich = array(0 => 'alle', 1 => 'AvA', 2 => 'PvE', 3 => 'Bi-Auslegung');
+		$arrayBuildauslegung = array(0 => 'alle', 1 => 'Schaden', 2 => 'Support/Tank', 3 => 'Heilung');
+		$arrayKlasse = array(0 => 'alle', 1 => 'Drachenritter', 2 => 'Nachtklinge', 3 => 'Templer', 4 => 'Zauberer');
+		$arrayWaffenset = array(0 => 'alle', 1 => 'Zweihänder', 2 => 'Einhand mit Schild', 3 => 'Bogen', 
+		4 => 'Zerstörungsstab', 5 => 'Wiederherstellungsstab');
 		
 		$filterSpielbereich = new Dropdown('Spielbereich', $arraySpielbereich);
 		$filterBuildauslegung = new Dropdown('Buildauslegung', $arrayBuildauslegung);
 		$filterKlasse = new Dropdown('Klasse', $arrayKlasse);
-		$filterHaupthand = new Dropdown('Haupthand', $arrayHaupthand);
-		$filterBegleithand = new Dropdown('Begleithand', $arrayNebenhand);
+		$filterWaffenset = new Dropdown('Waffenset', $arrayWaffenset);
 
 		$myFilter = '
-			<form action="/index.php/Gw2Buildsearch#myMain" method="POST">
+			<form action="/index.php/EsoBuildsearch#myMain" method="POST">
 				<div id="filter_inhalt">
 				
 				'. $filterSpielbereich->getDropdown() .'
 				'. $filterBuildauslegung->getDropdown() .'
 				'. $filterKlasse->getDropdown() .'
-				'. $filterHaupthand->getDropdown() .'
-				'. $filterBegleithand->getDropdown() .'
+				'. $filterWaffenset->getDropdown() .'
 				
 				</div>	
 			</form>
@@ -77,21 +72,17 @@ class Gw2BuildsearchPage extends AbstractPage
 	
 	public function create($instanz)
 	{
-		$arraySpielbereich = array(0 => 'WvW', 1 => 'PvE', 2 => 'sPvP');
-		$arrayBuildauslegung = array(0 => 'Schaden', 1 => 'Support/Tank', 2 => 'Bi-Auslegung');
-		$arrayKlasse = array(0 => 'Krieger', 1 => 'Wächter', 2 => 'Dieb', 3 => 'Ingenieur', 4 => 'Waldläufer', 5 => 'Elementarmagier', 6 => 'Mesmer', 7 => 'Nekromant');
-		$arrayHaupthand = array(0 => 'Gewehr', 1 => 'Grossschwert', 2 => 'Hammer', 3 => 'Kurzbogen', 4 => 'Langbogen', 5 => 'Stab', 
-								6 => 'Axt', 7 => 'Dolch', 8 => 'Pistole', 9 => 'Schwert', 10 => 'Streitkolben', 11 => 'Zepter');
-		$arrayNebenhand = array(0 => '-', 1 => 'Axt', 2 => 'Dolch', 3 => 'Pistole', 4 => 'Schwert', 5 => 'Streitkolben', 
-								6 => 'Fackel', 7 => 'Fokus', 8 => 'Kriegshorn', 9 => 'Schild');
+		$arraySpielbereich = array(0 => 'AvA', 1 => 'PvE', 2 => 'Bi-Auslegung');
+		$arrayBuildauslegung = array(0 => 'Schaden', 1 => 'Support/Tank', 2 => 'Heilung');
+		$arrayKlasse = array(0 => 'Drachenritter', 1 => 'Nachtklinge', 2 => 'Templer', 3 => 'Zauberer');
+		$arrayWaffenset = array(0 => 'Zweihänder', 1 => 'Einhand mit Schild', 2 => 'Bogen', 
+		3 => 'Zerstörungsstab', 4 => 'Wiederherstellungsstab');
 		
 		$createSpielbereich = new Dropdown('Spielbereich', $arraySpielbereich);
 		$createBuildauslegung = new Dropdown('Buildauslegung', $arrayBuildauslegung);
 		$createKlasse = new Dropdown('Klasse', $arrayKlasse);
-		$createHaupthand = new Dropdown('Hauptwaffensatz - Haupthand', $arrayHaupthand);
-		$createBegleithand = new Dropdown('Hauptwaffensatz - Begleithand', $arrayNebenhand);
-		$createHaupthandOff = new Dropdown('Nebenwaffensatz - Haupthand', $arrayHaupthand);
-		$createBegleithandOff = new Dropdown('Nebenwaffensatz - Begleithand', $arrayNebenhand);
+		$createWaffenset = new Dropdown('Hauptwaffensatz', $arrayWaffenset);
+		$createWaffensetOff = new Dropdown('Nebenwaffensatz', $arrayWaffenset);
 		
 		$valueTitel = "";
 		$valueBeschreibung = "";
@@ -108,7 +99,7 @@ class Gw2BuildsearchPage extends AbstractPage
 		} 
 		
 		$myCreateForm = '
-			<form action="/index.php/Gw2Buildsearch/" method="POST">
+			<form action="/index.php/EsoBuildsearch/" method="POST">
 				<div class="createTitel">
 					<label>Kurzbeschreibung</label>
 					<input type="text" size="40" maxlength="45" name="createTitel" value="' . $valueTitel . '"> 
@@ -125,10 +116,8 @@ class Gw2BuildsearchPage extends AbstractPage
 				<div class="createKlasse">'. $createKlasse->getOnlyDropdown("create") .'</div>
 				<div class="createSpielbereich">'. $createSpielbereich->getOnlyDropdown("create") .'</div>
 				<div class="createBuildauslegung">'. $createBuildauslegung->getOnlyDropdown("create") .'</div>
-				<div class="createHaupthand">'. $createHaupthand->getOnlyDropdownWithName("create", "Haupthand") .'</div>
-				<div class="createBegleithand">'. $createBegleithand->getOnlyDropdownWithName("create", "Nebenhand") .'</div>
-				<div class="createHaupthand">'. $createHaupthandOff->getOnlyDropdownWithName("create", "HaupthandOff") .'</div>
-				<div class="createBegleithand">'. $createBegleithandOff->getOnlyDropdownWithName("create", "NebenhandOff") .'</div>
+				<div class="createWaffenset">'. $createWaffenset->getOnlyDropdownWithName("create", "Waffenset") .'</div>
+				<div class="createWaffensetOff">'. $createWaffensetOff->getOnlyDropdownWithName("create", "WaffensetOff") .'</div>
 				
 				<div class="buttons">
 					<input name="safeBuild" class="button" type="submit" value="Build speichern">
@@ -165,19 +154,7 @@ class Gw2BuildsearchPage extends AbstractPage
 	
 	public function assignVariables() {
         parent::assignVariables();
-/*
-        WCF::getTPL()->assign(array(
-            'world' => $this->world,
-            'siteName' => $this->world,
-            'siteBeschreibung' => $this->world,
-            'userMessages' => $this->world,
-            'myChance' => $this->world,
-            'createBuild' => $this->world,
-            'editBuild' => $this->world,
-            'filter' => $this->world,
-            'datensatz' => $this->world
-        ));
-*/
+        // TODO - ausmisten und hier gruppieren
     }
 }
 

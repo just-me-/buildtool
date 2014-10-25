@@ -2,7 +2,7 @@
     <head>
         <title>Buildsearch - {lang}{PAGE_TITLE}{/lang}</title>
         {include file='headInclude' sandbox=false}
-		<link rel="stylesheet" type="text/css" media="screen" href="wcf/style/Gw2Buildsearch.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="wcf/style/EsoBuildsearch.css">
 		<script type="text/javascript">
 		function toggle(control){
 			var elem = document.getElementById(control);
@@ -18,6 +18,7 @@
 		{include file='header' sandbox=false}
         <div id="main">
          <div>
+          <div>
             <div class="mainHeadline">
                 <div class="headlineContainer">
                     <h2>{$siteName}</h2>
@@ -47,7 +48,7 @@
 							<div class="modal-content">
 							  <div class="modal-header">
 								<button type="button" class="floatright close" data-dismiss="modal" aria-hidden="true">&times;</button>
-								<h2 class="modal-title" id="myModalLabel">Hilfe und Informationen zu der Gw2 Buildsuche</h2>
+								<h2 class="modal-title" id="myModalLabel">Hilfe und Informationen zu der ESO Buildsuche</h2>
 							  </div>
 							  <div class="modal-body">
 								<h3>Was ist das?</h4>
@@ -157,6 +158,7 @@
 					{@$datensatz}
 				</div>
 			</div>
+		   </div>
 		 </div>
         </div>
 		{include file='footer' sandbox=false}

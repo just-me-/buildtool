@@ -3,7 +3,7 @@
 namespace wcf\page;
 use wcf\system\WCF;
 
-require_once('Gw2BuildsearchPage.class.php');
+require_once('EsoBuildsearchPage.class.php');
 require_once('Dropdown.class.php'); 
 require_once('HtmlTag.class.php');
 
@@ -11,8 +11,8 @@ require_once('HtmlTag.class.php');
  * Guild Wars 2 Buildsearch
  *
  * @author       Marcel H. 
- * @copyright    2013 Marcel H. 
- * @package      net.poebel.gw2.buildsearch
+ * @copyright    2014 Marcel H. 
+ * @package      ch.merlin.eso.buildsearch
  */
 class BuildDatabase
 {	
@@ -30,7 +30,7 @@ class BuildDatabase
 	public function getBuilds()
 	{
 		$builds="";
-		$sql="SELECT * from gw2_buildsearch_builds";
+		$sql="SELECT * from eso_buildsearch_builds";
 		$filterungen = 0; 
 		if(!empty($_POST['Spielbereich']) && ($_POST['Spielbereich'] != 'alle')){
 			if($filterungen==0){$sql .= " WHERE spielbereich = '". $_POST['Spielbereich'] ."'";}
@@ -47,16 +47,12 @@ class BuildDatabase
 			else{$sql .= " AND klasse = '". $_POST['Klasse'] ."'";}
 			$filterungen++; 
 		}
-		if(!empty($_POST['Haupthand']) && ($_POST['Haupthand'] != 'alle')){
-			if($filterungen==0){$sql .= " WHERE (haupthand = '". $_POST['Haupthand'] ."' OR haupthandoff = '". $_POST['Haupthand'] ."')";}
-			else{$sql .= " AND (haupthand = '". $_POST['Haupthand'] ."' OR haupthandoff = '". $_POST['Haupthand'] ."')";}
+		if(!empty($_POST['Waffenset']) && ($_POST['Waffenset'] != 'alle')){
+			if($filterungen==0){$sql .= " WHERE (waffenset = '". $_POST['Waffenset'] ."' OR waffensetoff = '". $_POST['Waffenset'] ."')";}
+			else{$sql .= " AND (waffenset = '". $_POST['Waffenset'] ."' OR waffensetoff = '". $_POST['Waffenset'] ."')";}
 			$filterungen++; 
 		}
-		if(!empty($_POST['Begleithand']) && ($_POST['Begleithand'] != 'alle')){
-			if($filterungen==0){$sql .= " WHERE (begleithand = '". $_POST['Begleithand'] ."' OR begleithandoff = '". $_POST['Begleithand'] ."')";}
-			else{$sql .= " AND (begleithand = '". $_POST['Begleithand'] ."' OR begleithandoff = '". $_POST['Begleithand'] ."')";}
-			$filterungen++; 
-		}
+		
 		/* Adminberechtigung pruefen */
 		$arrayGruppen = WCF::getUser()->getGroupIDs();
 		$admin = false;
@@ -73,26 +69,38 @@ class BuildDatabase
 		$statement = $this->zugriff->prepareStatement($sql);
 		$statement->execute();
 		while ($row = $statement->fetchArray()) {
-			if(!empty( $row['haupthand'])){
-				$haupthandIcon = '<img title="' . $row['haupthand'] . '" src="wcf/icon/' . $row['haupthand'] . '.png" alt="' . $row['haupthand'] . '"</img>';
-			} else { $haupthandIcon = ""; }
-			if(!empty( $row['begleithand'])){
-				$nebenhandIcon = '<img title="' . $row['begleithand'] . '" src="wcf/icon/' . $row['begleithand'] . '.png" alt="' . $row['begleithand'] . '"</img>';
-			} else { $nebenhandIcon = ""; }
-			if(!empty( $row['haupthandoff'])){
-				$haupthandOffIcon = '<img title="' . $row['haupthandoff'] . '" src="wcf/icon/' . $row['haupthandoff'] . '.png" alt="' . $row['haupthandoff'] . '"</img>';
-			} else { $haupthandOffIcon = ""; }
-			if(!empty( $row['begleithandoff'])){
-				$nebenhandOffIcon = '<img title="' . $row['begleithandoff'] . '" src="wcf/icon/' . $row['begleithandoff'] . '.png" alt="' . $row['begleithandoff'] . '"</img>';
-			} else { $nebenhandOffIcon = ""; }
+		
+			$waffensetIcon = $row['waffenset']; 
+			$waffensetIconOff = $row['waffensetoff']; 
+			
+			if ($waffensetIcon == "Zerstörungsstab") {
+				$waffensetIcon = "Zerstoerungsstab"; 
+			}
+			if ($waffensetIcon == "Zweihänder") {
+				$waffensetIcon = "Zweihaender"; 
+			}
+			if ($waffensetIcon == "Einhand mit Schild") {
+				$waffensetIcon = "Einhand_mit_Schild"; 
+			}
+			if ($waffensetIconOff == "Zerstörungsstab") {
+				$waffensetIconOff = "Zerstoerungsstab"; 
+			}
+			if ($waffensetIconOff == "Zweihänder") {
+				$waffensetIconOff = "Zweihaender"; 
+			}
+			if ($waffensetIconOff == "Einhand mit Schild") {
+				$waffensetIconOff = "Einhand_mit_Schild"; 
+			}
+			
+			
+			if(!empty( $row['waffenset'])){
+				$waffensetIcon = '<img title="' . $row['waffenset'] . '" src="wcf/icon/' . $waffensetIcon . '.png" alt="' . $row['waffenset'] . '"</img>';
+			} else { $waffensetIcon = ""; }
+			if(!empty( $row['waffensetoff'])){
+				$waffensetOffIcon = '<img title="' . $row['waffensetoff'] . '" src="wcf/icon/' . $waffensetIconOff . '.png" alt="' . $row['waffensetoff'] . '"</img>';
+			} else { $waffensetOffIcon = ""; }
 			
 			$classFile = $row['klasse'];
-			if($row['klasse'] == "Wächter"){
-				$classFile = "Waechter"; 
-			}
-			if($row['klasse'] == "Waldläufer"){
-				$classFile = "Waldlaeufer";
-			}
 			
 			/* Bewertung */ /*build_0.png build_1.png*/
 			/* Hier wird ausgelesen und gerechnet; dann wird 'gerundet' ermittelt */ $gerundet = 3;
@@ -127,20 +135,17 @@ class BuildDatabase
 					<div class="gefundenerSpielbereich floatleft">' . $row['spielbereich'] . '</div>
 					<div class="gefundeneBuildauslegung floatleft">' . $row['buildauslegung'] . '</div>
 					<div class="gefundeneKlasse floatleft"><img title="' . $row['klasse'] . '" src="wcf/icon/' . $classFile . '.png" alt="' . $row['klasse'] . '"</img></div>
-					<div class="gefundeneHaupthand floatleft">' . $haupthandIcon . '</div>
-					<div class="gefundeneBegleithand floatleft">' . $nebenhandIcon . '</div>
-					<div class="gefundeneHaupthandOff floatleft">' . $haupthandOffIcon . '</div>
-					<div class="gefundeneBegleithandOff floatleft">' . $nebenhandOffIcon . '</div>
+					<div class="gefundeneWaffenset floatleft">' . $waffensetIcon . '</div>
+					<div class="gefundeneWaffensetOff floatleft">' . $waffensetOffIcon . '</div>
 					<div class="gefundeneBewertung floatleft">' . $bewertungsTag . '</div>
 				</div>
 					
 				<div id="build_' . $row['id'] . '" class="collapse">
 					<div id="build_' . $row['id'] . '_" class="gefundenerInhalt">
-						<form action="/index.php/Gw2Buildsearch/" method="POST">
+						<form action="/index.php/EsoBuildsearch/" method="POST">
 							<input class="hidden" name="thisBuildID" value="' . $row['id'] . '" readonly="readonly">
 							<div class="inhaltBeschreibung floatleft"><p><strong>Beschreibung: </strong>' . $row['beschreibung'] . '</p></div>
 							<div class="infoBox floatright">
-								<div class="inhaltKlicks"><p><strong>Anzahl Klicks: </strong>' . $row['klicks'] . '</p></div>
 								<div class="inhaltAutor"><p><strong>Autor: </strong>' . $row['autor'] . '</p></div>
 								<div class="inhaltErtstellungsdatum"><p><strong>Erstellt am: </strong>' . $row['erstellungsdatum'] . '</p></div>
 							</div>
@@ -174,41 +179,31 @@ class BuildDatabase
 			return '<div class="fehlerBox">Sie müssen sich anmelden, damit Sie Ihre Builds editieren können.</div>';
 		}
 		
-		$sql="SELECT * from gw2_buildsearch_builds WHERE autor = '" . $user . "'";
+		$sql="SELECT * from eso_buildsearch_builds WHERE autor = '" . $user . "'";
 		$statement = $this->zugriff->prepareStatement($sql);
 		$statement->execute();
 		
 		/* tmp */
-		$arraySpielbereich = array(0 => 'WvW', 1 => 'PvE', 2 => 'sPvP');
-		$arrayBuildauslegung = array(0 => 'Schaden', 1 => 'Support/Tank', 2 => 'Bi-Auslegung');
-		$arrayKlasse = array(0 => 'Krieger', 1 => 'Wächter', 2 => 'Dieb', 3 => 'Ingenieur', 4 => 'Waldläufer', 5 => 'Elementarmagier', 6 => 'Mesmer', 7 => 'Nekromant');
-		$arrayHaupthand = array(0 => 'Gewehr', 1 => 'Grossschwert', 2 => 'Hammer', 3 => 'Kurzbogen', 4 => 'Langbogen', 5 => 'Stab', 
-								6 => 'Axt', 7 => 'Dolch', 8 => 'Pistole', 9 => 'Schwert', 10 => 'Streitkolben', 11 => 'Zepter');
-		$arrayNebenhand = array(0 => '-', 1 => 'Axt', 2 => 'Dolch', 3 => 'Pistole', 4 => 'Schwert', 5 => 'Streitkolben', 
-								6 => 'Fackel', 7 => 'Fokus', 8 => 'Kriegshorn', 9 => 'Schild');
-		$createSpielbereich = new Dropdown('Spielbereich', $arraySpielbereich);
-		$createBuildauslegung = new Dropdown('Buildauslegung', $arrayBuildauslegung);
-		$createKlasse = new Dropdown('Klasse', $arrayKlasse);
-		$createHaupthand = new Dropdown('Hauptwaffensatz - Haupthand', $arrayHaupthand);
-		$createBegleithand = new Dropdown('Hauptwaffensatz - Begleithand', $arrayNebenhand);
-		$createHaupthandOff = new Dropdown('Nebenwaffensatz - Haupthand', $arrayHaupthand);
-		$createBegleithandOff = new Dropdown('Nebenwaffensatz - Begleithand', $arrayNebenhand);
+		$arraySpielbereich = array(0 => 'AvA', 1 => 'PvE', 2 => 'Bi-Auslegung');
+		$arrayBuildauslegung = array(0 => 'Schaden', 1 => 'Support/Tank', 2 => 'Heilung');
+		$arrayKlasse = array(0 => 'Drachenritter', 1 => 'Nachtklinge', 2 => 'Templer', 3 => 'Zauberer');
+		$arrayWaffenset = array(0 => 'Zweihänder', 1 => 'Einhand mit Schild', 2 => 'Bogen', 
+		3 => 'Zerstörungsstab', 4 => 'Wiederherstellungsstab');
 		/* tmp END */
 		$counter = 0;
 		while ($row = $statement->fetchArray()) {
+		
+			$createSpielbereich = new Dropdown('Spielbereich', $arraySpielbereich);
+			$createBuildauslegung = new Dropdown('Buildauslegung', $arrayBuildauslegung);
+			$createKlasse = new Dropdown('Klasse', $arrayKlasse);
+			$createWaffenset = new Dropdown('Hauptwaffensatz', $arrayWaffenset);
+			$createWaffensetOff = new Dropdown('Nebenwaffensatz', $arrayWaffenset);
+			
 			$counter++;
-			
 			$classFile = $row['klasse'];
-			if($row['klasse'] == "Wächter"){
-				$classFile = "Waechter"; 
-			}
-			if($row['klasse'] == "Waldläufer"){
-				$classFile = "Waldlaeufer";
-			}
-			
 			$builds .= '
 			<div class="gefundenerDatensatz">
-			 <form action="/index.php/Gw2Buildsearch/" method="POST">
+			 <form action="/index.php/EsoBuildsearch/" method="POST">
 				<input class="hidden" name="thisBuildID" value="' . $row['id'] . '" readonly="readonly">
 				<div class="gefundeneUeberschrift">
 					<div class="gedundenerTitel floatleft">
@@ -216,10 +211,8 @@ class BuildDatabase
 						<a class="collapsed" data-toggle="collapse" data-parent="#myMain" href="#myBuild_' . $row['id'] . '">' . $row['titel'] . '</a>
 					</div>
 					<div class="gefundeneKlasse floatleft"><img title="' . $row['klasse'] . '" src="wcf/icon/' . $classFile . '.png" alt="' . $row['klasse'] . '"</img></div>
-					<div class="gefundeneHaupthand floatleft">' . $row['haupthand'] . '</div>
-					<div class="gefundeneBegleithand floatleft">' . $row['begleithand'] . '</div>
-					<div class="gefundeneHaupthand floatleft">' . $row['haupthandoff'] . '</div>
-					<div class="gefundeneBegleithand floatleft">' . $row['begleithandoff'] . '</div>
+					<div class="gefundeneWaffenset floatleft">' . $row['waffenset'] . '</div>
+					<div class="gefundeneWaffenset floatleft">' . $row['waffensetoff'] . '</div>
 					<div class="gefundenesErstelldatum floatright">'. $row['erstellungsdatum'] .'</div>
 				</div>
 					
@@ -241,10 +234,8 @@ class BuildDatabase
 								<div class="createKlasse">'. $createKlasse->getSelectedDropdown("edit", $row['klasse']) .'</div>
 								<div class="createSpielbereich">'. $createSpielbereich->getSelectedDropdown("edit", $row['spielbereich']) .'</div>
 								<div class="createBuildauslegung">'. $createBuildauslegung->getSelectedDropdown("edit", $row['buildauslegung']) .'</div>
-								<div class="createHaupthand clear">'. $createHaupthand->getSelectedDropdownWithName("edit", "Haupthand", $row['haupthand']) .'</div>
-								<div class="createBegleithand">'. $createBegleithand->getSelectedDropdownWithName("edit", "Nebenhand", $row['begleithand']) .'</div>
-								<div class="createHaupthand clear">'. $createHaupthandOff->getSelectedDropdownWithName("edit", "HaupthandOff", $row['haupthandoff']) .'</div>
-								<div class="createBegleithand">'. $createBegleithandOff->getSelectedDropdownWithName("edit", "NebenhandOff", $row['begleithandoff']) .'</div>
+								<div class="createWaffenset clear">'. $createWaffenset->getSelectedDropdownWithName("edit", "Waffenset", $row['waffenset']) .'</div>
+								<div class="createWaffenset clear">'. $createWaffensetOff->getSelectedDropdownWithName("edit", "WaffensetOff", $row['waffensetoff']) .'</div>
 								
 								<div class="buttons clear">
 									<input name="safeEditedBuild" class="button" type="submit" value="Änderungen speichern">
@@ -290,27 +281,13 @@ class BuildDatabase
 			$spielbereich = strip_tags($_POST['createSpielbereich']);
 			$buildauslegung = strip_tags($_POST['createBuildauslegung']);
 			$klasse = strip_tags($_POST['createKlasse']);
-			$haupthand = strip_tags($_POST['createHaupthand']);
-			$begleithand = strip_tags($_POST['createNebenhand']);
-			$haupthandOff = strip_tags($_POST['createHaupthandOff']);
-			$begleithandOff = strip_tags($_POST['createNebenhandOff']);
+			$waffenset = strip_tags($_POST['createWaffenset']);
+			$waffensetOff = strip_tags($_POST['createWaffensetOff']);
 			
 			$myValidate = new BuildValidate();
 			
 			if($myValidate->checkKlasse($klasse) != true){
 				return "Die Klasse ist fehlerhaft.";
-			}
-			if($myValidate->checkWeapon($haupthand, $begleithand, $klasse) != true){
-				return "Die Waffenwahl ist fehlerhaft für die Klasse " . $klasse . ".";
-			}
-			if(($klasse == "Elementarmagier") || ($klasse == "Ingenieur")){
-				$haupthandOff = "";
-				$begleithandOff = "";
-			}
-			else{
-				if($myValidate->checkWeapon($haupthandOff, $begleithandOff, $klasse) != true){
-					return "Die Waffenwahl des zweiten Waffensets ist fehlerhaft für die Klasse " . $klasse . ".";
-				}
 			}
 			if($myValidate->checkSpielbereich($spielbereich) != true){
 				return "Der Spielbereich ist fehlerhaft.";
@@ -319,21 +296,12 @@ class BuildDatabase
 				return "Die Buildauslegung ist fehlerhaft.";
 			}
 			
-			/* Zur Schoenheit wird der Gedankenstrich nicht in die DB geschrieben */
-			if($begleithand == "-"){
-				$begleithand = "";
-			}
-			if($begleithandOff == "-"){
-				$begleithandOff = "";
-			}
-			
-			$klicks = 0;
 			$autor = WCF::getUser()->username;
 			$erstellungsdatum = date("d.m.Y", time());
 			 
 			$sql = "
-			INSERT INTO gw2_buildsearch_builds (spielbereich, buildauslegung, klasse, haupthand, begleithand, haupthandoff,  begleithandoff, titel, beschreibung, link, klicks, autor, erstellungsdatum) VALUES 
-			('". $spielbereich ."', '". $buildauslegung ."', '". $klasse ."', '". $haupthand ."', '". $begleithand ."', '". $haupthandOff ."', '". $begleithandOff ."', '". $titel ."', '". $beschreibung ."', '". $link ."', ". $klicks .", '". $autor ."', '". $erstellungsdatum ."')
+			INSERT INTO eso_buildsearch_builds (spielbereich, buildauslegung, klasse, waffenset, waffensetoff, titel, beschreibung, link, autor, erstellungsdatum) VALUES 
+			('". $spielbereich ."', '". $buildauslegung ."', '". $klasse ."', '". $waffenset ."', '". $waffensetOff ."', '". $titel ."', '". $beschreibung ."', '". $link ."', '". $autor ."', '". $erstellungsdatum ."')
 			";
 			$statement = $this->zugriff->prepareStatement($sql);
 			$statement->execute();
@@ -346,11 +314,10 @@ class BuildDatabase
 		if (isset($_POST["safeEditedBuild"])) 
 		{ 
 			$user = WCF::getUser();
-			if($user == ""){return "Das Anmelde-Session abgelaufen. Bitte anmelden.";}
+			if($user == ""){return "Die Anmelde-Session ist abgelaufen. Bitte anmelden.";}
 			
 			/* Testen, ob Ersteller == Updater ist; falls ja - dann aktualisieren. */
-			$sql="SELECT * from gw2_buildsearch_builds WHERE autor = '" . $user . "'";
-			$result = $this->zugriff->sendQuery($sql);
+			$sql="SELECT * from eso_buildsearch_builds WHERE autor = '" . $user . "'";
 			$statement = $this->zugriff->prepareStatement($sql);
 			$statement->execute();
 			$check = false;
@@ -380,27 +347,13 @@ class BuildDatabase
 				$spielbereich = strip_tags($_POST['editSpielbereich']);
 				$buildauslegung = strip_tags($_POST['editBuildauslegung']);
 				$klasse = strip_tags($_POST['editKlasse']);
-				$haupthand = strip_tags($_POST['editHaupthand']);
-				$begleithand = strip_tags($_POST['editNebenhand']);
-				$haupthandOff = strip_tags($_POST['editHaupthandOff']);
-				$begleithandOff = strip_tags($_POST['editNebenhandOff']);
+				$waffenset = strip_tags($_POST['editWaffenset']);
+				$waffensetOff = strip_tags($_POST['editWaffensetOff']);
 				
 				$myValidate = new BuildValidate();
 				
 				if($myValidate->checkKlasse($klasse) != true){
 					return "Die Klasse ist fehlerhaft.";
-				}
-				if($myValidate->checkWeapon($haupthand, $begleithand, $klasse) != true){
-					return "Die Waffenwahl ist fehlerhaft für die Klasse " . $klasse . ".";
-				}
-				if(($klasse == "Elementarmagier") || ($klasse == "Ingenieur")){
-					$haupthandOff = "";
-					$begleithandOff = "";
-				}
-				else{
-					if($myValidate->checkWeapon($haupthandOff, $begleithandOff, $klasse) != true){
-						return "Die Waffenwahl des zweiten Waffensets ist fehlerhaft für die Klasse " . $klasse . ".";
-					}
 				}
 				if($myValidate->checkSpielbereich($spielbereich) != true){
 					return "Der Spielbereich ist fehlerhaft.";
@@ -408,19 +361,11 @@ class BuildDatabase
 				if($myValidate->checkBuildauslegung($buildauslegung) != true){
 					return "Die Buildauslegung ist fehlerhaft.";
 				}
-				
-				/* Zur Schoenheit wird der Gedankenstrich nicht in die DB geschrieben */
-				if($begleithand == "-"){
-					$begleithand = "";
-				}
-				if($begleithandOff == "-"){
-					$begleithandOff = "";
-				}
 				$erstellungsdatum = date("d.m.Y", time());
 				
-				$sql = "UPDATE gw2_buildsearch_builds 
+				$sql = "UPDATE eso_buildsearch_builds 
 					SET spielbereich = '". $spielbereich ."', buildauslegung = '". $buildauslegung ."', klasse = '". $klasse ."', 
-					haupthand = '". $haupthand ."', begleithand = '". $begleithand ."', haupthandoff = '". $haupthandOff ."',  begleithandoff = '". $begleithandOff ."', 
+					waffenset = '". $waffenset ."', waffensetoff = '". $waffensetOff ."',  
 					titel = '". $titel ."', beschreibung = '". $beschreibung ."', link = '". $link ."', erstellungsdatum = '". $erstellungsdatum ."'
 					WHERE id = " . $_POST["thisBuildID"];
 				$statement = $this->zugriff->prepareStatement($sql);
@@ -433,9 +378,9 @@ class BuildDatabase
 		if (isset($_POST["delBuildAutor"])) 
 		{ 
 			$user = WCF::getUser();
-			if($user == ""){return "Das Anmelde-Session abgelaufen. Bitte anmelden.";}
+			if($user == ""){return "Die Anmelde-Session ist abgelaufen. Bitte anmelden.";}
 			
-			$sql="SELECT * from gw2_buildsearch_builds WHERE autor = '" . $user . "'";
+			$sql="SELECT * from eso_buildsearch_builds WHERE autor = '" . $user . "'";
 			$statement = $this->zugriff->prepareStatement($sql);
 			$statement->execute();
 			$check = false;
@@ -445,7 +390,7 @@ class BuildDatabase
 				}
 			}
 			if($check == true){
-				$sql = "DELETE FROM gw2_buildsearch_builds WHERE id = " . $_POST["thisBuildID"];
+				$sql = "DELETE FROM eso_buildsearch_builds WHERE id = " . $_POST["thisBuildID"];
 				$statement = $this->zugriff->prepareStatement($sql);
 				$statement->execute();
 				return "Dein Build wurde erfolgreich gelöscht.";
@@ -469,7 +414,7 @@ class BuildDatabase
 			}
 			if($admin != true){ return "Sie sind kein Admin!";}
 			
-			$sql = "DELETE FROM gw2_buildsearch_builds WHERE id = " . $_POST["thisBuildID"];
+			$sql = "DELETE FROM eso_buildsearch_builds WHERE id = " . $_POST["thisBuildID"];
 			$statement = $this->zugriff->prepareStatement($sql);
 			$statement->execute();
 			return "Build Nr. " . $_POST["thisBuildID"] . " wurde erfolgreich gelöscht.";
@@ -478,13 +423,3 @@ class BuildDatabase
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-

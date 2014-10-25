@@ -1,3 +1,26 @@
+#content {
+	background: #D8D8D8 !important;
+	background: -moz-linear-gradient(left, #fff 0%, #D8D8D8 40%, #D8D8D8 60%, #fff 100%) !important;
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%, #fff), color-stop(40%, #D8D8D8), color-stop(60%, #D8D8D8), color-stop(100%, #fff)) !important;
+	background: -webkit-linear-gradient(left, #fff 0%, #D8D8D8 40%, #D8D8D8 60%, #fff 100%) !important;
+	background: -o-linear-gradient(left, #fff 0%, #D8D8D8 40%, #D8D8D8 60%, #fff 100%) !important;
+	background: -ms-linear-gradient(left, #fff 0%, #D8D8D8 40%, #D8D8D8 60%, #fff 100%) !important;
+	background: linear-gradient(left, #ffffff 0%,#D8D8D8 40%,#D8D8D8 60%,#ffffff 100%) !important;
+}
+#content, 
+#content a {
+	color: gray; 
+}
+.gedundenerTitel a {
+	text-decoration: underline; 
+}
+
+input:hover,
+textarea:hover{
+	background-color: #FFFFFF !important; 
+	border-color: #ccc !important; 
+}
+
 .floatleft { float: left; display: block;}
 .floatright { float: right; display: block;}
 .clear { clear: both; display: block;}
@@ -13,7 +36,6 @@
 	padding-left: 2px;
 }
 #filter{
-	width: 960px;
 	height: 55px; 
 	padding: 10px;
 	background-color: #efeeee;
@@ -37,7 +59,6 @@
 
 #gefundeneHeader{
 	font-weight: bold;
-	width: 960px;
 	height:15px;
 	padding: 10px;
 	background-color: #efeeee;
@@ -72,7 +93,6 @@
 
 
 .gefundeneUeberschrift{
-	width: 960px;
 	height: 25px; 
 	padding: 0 10px;
 	border-style: solid;
@@ -147,13 +167,13 @@
 }
 /* Buttons */
 .button{
-	  background: #eee;
+	  background: #eee !important;
 	  border: 1px solid #aaa;
 	  border-top: 1px solid #ccc;
 	  border-left: 1px solid #ccc;
 	  padding: 4px 12px;
-	  border-radius: 3px;
-	  color: #444;
+	  border-radius: 3px !important;
+	  color: #444 !important;
 	  display: inline-block;
 	  font-size: 11px !important;
 	  font-weight: bold;
@@ -162,11 +182,12 @@
 	  cursor: pointer;
 	  line-height: 21px;
 	  font-family: Helvetica, Arial, sans-serif; 
+	  box-shadow: none; 
 }
 
 .button:hover{
-	  color: #222;
-	  background: #ddd;
+	  color: #222 !important;
+	  background: #ddd !important;
 	  border: 1px solid #888;
 	  border-top: 1px solid #aaa;
 	  border-left: 1px solid #aaa; 
@@ -174,22 +195,22 @@
 
 a.button:active{
 		border: 1px solid #666;
-		background: #ccc;
+		background: #ccc !important;
 }
 
 .button.delAsAdmin{
-	  background: #ac1817;
-	  color: #FFF;
+	  background: #ac1817 !important;
+	  color: #FFF !important;
 	  text-shadow: 0 1px #AB2B1E; 
 }
 
 .button.delAsAdmin:hover{
-	  color: #FFF;
-	  background: #A71716; 
+	  color: #FFF !important;
+	  background: #A71716 !important; 
 }
 
 a.button.delAsAdmin:active{
-		background: #981514;
+		background: #981514 !important;
 }
 button.button{
 	margin-top: 0;
@@ -276,7 +297,7 @@ div.createHaupthandOff{
 		
 /* IconKorrektur */
 .gefundenerDatensatz img{
-	max-width: 30px;
+	max-width: 60px;
 }
 .gefundenerDatensatz img.bewertung {
 	max-width: 13px;

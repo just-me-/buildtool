@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language languagecode="de" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/language.xsd">
-    <category name="ch.merlin.gw2.buildsearch">
-        <item name="ch.merlin.gw2.buildsearch.htmltitle"><![CDATA[Buildsuche]]></item>
-        <item name="ch.merlin.gw2.buildsearch.pagetitle"><![CDATA[Guild Wars 2 - Buildsuche]]></item>
+    <category name="ch.merlin.eso.buildsearch">
+        <item name="ch.merlin.eso.buildsearch.htmltitle"><![CDATA[Buildsuche]]></item>
+        <item name="ch.merlin.eso.buildsearch.pagetitle"><![CDATA[ESO - Buildsuche]]></item>
     </category>
 </language>
