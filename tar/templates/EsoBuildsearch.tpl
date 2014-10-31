@@ -164,5 +164,6 @@
 		{include file='footer' sandbox=false}
 		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script src="wcf/bs/bootstrap.js" type="text/javascript"></script>
+		<script src="wcf/js/buildsearch.js" type="text/javascript"></script>
     </body>
 </html>

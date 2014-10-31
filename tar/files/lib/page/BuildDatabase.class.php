@@ -102,28 +102,45 @@ class BuildDatabase
 			
 			$classFile = $row['klasse'];
 			
-			/* Bewertung */ /*build_0.png build_1.png*/
-			/* Hier wird ausgelesen und gerechnet; dann wird 'gerundet' ermittelt */ $gerundet = 3;
-			$bewertung1 = "build_1.png";
-			$bewertung2 = "build_0.png";
-			$bewertung3 = "build_0.png";
-			$bewertung4 = "build_0.png";
-			$bewertung5 = "build_0.png";
-			if($gerundet >= 2){ $bewertung2 = "build_1.png";}
-			if($gerundet >= 3){ $bewertung3 = "build_1.png";}
-			if($gerundet >= 4){ $bewertung4 = "build_1.png";}
-			if($gerundet >= 5){ $bewertung5 = "build_1.png";}
-			$bewertungsTag = '<img class="bewertung" title="Bewertung: ' . $gerundet . ' von 5" src="wcf/icon/' . $bewertung1 . '" alt="Bewertung: ' . $gerundet . ' von 5"</img>';
-			$bewertungsTag .= '<img class="bewertung" title="Bewertung: ' . $gerundet . ' von 5" src="wcf/icon/' . $bewertung2 . '" alt="Bewertung: ' . $gerundet . ' von 5"</img>';
-			$bewertungsTag .= '<img class="bewertung" title="Bewertung: ' . $gerundet . ' von 5" src="wcf/icon/' . $bewertung3 . '" alt="Bewertung: ' . $gerundet . ' von 5"</img>';
-			$bewertungsTag .= '<img class="bewertung" title="Bewertung: ' . $gerundet . ' von 5" src="wcf/icon/' . $bewertung4 . '" alt="Bewertung: ' . $gerundet . ' von 5"</img>';
-			$bewertungsTag .= '<img class="bewertung" title="Bewertung: ' . $gerundet . ' von 5" src="wcf/icon/' . $bewertung5 . '" alt="Bewertung: ' . $gerundet . ' von 5"</img>';
+			/* Bewertung */
+			$like_sth = $this->zugriff->prepareStatement('SELECT * from eso_buildsearch_like WHERE buildid = '.$row['id']); 
+			$like_sth->execute();
+			$like_counter = 0; 
+			$user_likes = 0; 
+			while ($like_row = $like_sth->fetchArray()) {
+				// count all likes 
+				$like_counter++;
+				// do this user like alrdy? 
+				if ($like_row['autor'] == $user) {
+					$user_likes++;
+				}
+			}
+			// ajax js - glow more on rollover; send on click 
+			if($like_counter == 0) {
+				$alt_text = "Sei der Erste, dem dieses Build gefällt! "; 
+			} else {
+				$alt_text = "Dieser Beitrag gefällt ".$like_counter." Personen. "; 
+				if ($user_likes == 0) {
+					$alt_text .= "Gefällt er dir auch?";
+					$icon = "Veteran.png"; 
+				} else {
+					$alt_text .= "Dir auch. Magst du es nicht mehr?";
+					$icon = "Veteran_glow.png"; 
+				}
+			} 
+			
+			if ($like_counter == 0) {
+				$like_counter = ""; 
+			}
+			$bewertungsTag = '<span class="v_lvl">'.$like_counter.'</span><img class="bewertung" title="' . $alt_text . '" src="wcf/icon/' . $icon . '" 
+				alt="' . $alt_text . '" onmouseout="src=\'wcf/icon/' . $icon . '\'" onmouseover="src=\'wcf/icon/Veteran_glow_more.png\'" </img>'; 
+			$javascript_events = 'onclick="getVote(this)"'; 
 		
 			if( 0 < substr_count($row['link'], 'http')){
 				$thisLink = $row['link'];
 			} else{
 				$thisLink = "http://" . $row['link'];
-			}
+			}                  
 		
 			$builds .= '
 			<div class="gefundenerDatensatz">
