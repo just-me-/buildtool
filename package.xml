@@ -7,7 +7,7 @@
         <packagedescription><![CDATA[ESO Buildsearch]]></packagedescription>
         <packagedescription language="de"><![CDATA[ESO Buildsuche]]></packagedescription>
         <packagedescription language="de-informal"><![CDATA[ESO Buildsuche]]></packagedescription>
-        <version>1.0.11</version>
+        <version>1.0.16</version>
         <date>2014-10-18</date>
         <standalone>0</standalone>
         <isunique>1</isunique>
@@ -29,16 +29,15 @@
         <instruction type="file">files.tar</instruction>
         <instruction type="template">templates.tar</instruction>
 		<instruction type="sql">install.sql</instruction> <!-- Unnormalisierte 'Datenbank' zum Beginn -->
-        <!-- <acptemplates>acptemplates.tar</acptemplates> -->
     </instructions>
     
     <instructions type="update" fromversion="*">
         <languages languagecode="en">languages/en.xml</languages>
         <languages languagecode="de">languages/de.xml</languages>
         <languages languagecode="de-informal">languages/de-informal.xml</languages>
-        <instruction type="files">files.tar</instruction>
-        <instruction type="templates">templates.tar</instruction>
-        <!-- <acptemplates>acptemplates.tar</acptemplates> -->
+        <instruction type="file">files.tar</instruction>
+        <instruction type="template">templates.tar</instruction>
+        <!-- <instruction type="sql">upgrade.sql</instruction> -->
     </instructions>
 
 </package>

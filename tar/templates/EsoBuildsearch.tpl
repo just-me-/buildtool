@@ -22,7 +22,7 @@
             <div class="mainHeadline">
                 <div class="headlineContainer">
                     <h2>{$siteName}</h2>
-                    <p>{$siteBeschreibung}</p>
+                    <p>{@$siteBeschreibung}</p>
                 </div>
             </div>
             
@@ -38,7 +38,7 @@
 					</div>
 					
 					<div class="floatleft">
-						<button class="button btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="margin-left: 250px">
+						<button class="button btn btn-primary btn-lg ml250" data-toggle="modal" data-target="#myModal">
 							Hilfe und Informationen
 						</button>
 						
@@ -151,7 +151,7 @@
 					<div class="klasse floatleft">Klasse</div>
 					<div class="haupthand floatleft">Hauptwaffensatz</div>
 					<div class="begleithand floatleft">Nebenwaffensatz</div>
-					<div class="bewertung floatleft">Bewertung</div>
+					<div class="bewertung floatright">Bewertung</div>
 				</div>
 				
 				<div class="datensatz clear">

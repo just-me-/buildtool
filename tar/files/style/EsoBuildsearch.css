@@ -28,15 +28,15 @@ textarea:hover{
 
 #myMain{ background-color: #FFFFFF; }
 
-#actions{ min-height: 35px; clear: both;}
+#actions{ min-height: 35px; clear: both; padding-top: 1px; }
 #filter select{
-	min-width: 70px;
+	min-width: 140px;
 }
 #filter label {
 	padding-left: 2px;
 }
 #filter{
-	height: 55px; 
+	height: 45px; 
 	padding: 10px;
 	background-color: #efeeee;
 	border-top: 2px solid #e2e2e2;
@@ -79,16 +79,19 @@ textarea:hover{
 	width: 100px;
 }
 #gefundeneHeader .klasse{
-	margin-right: 45px;
-	width: 35px;
+	margin-right: 10px;
+	width: 45px;
 }
 #gefundeneHeader .haupthand{
-	margin-right: 30px;
-	width: 100px;
+	margin-right: 10px;
+	width: 110px;
 }
 #gefundeneHeader .begleithand{
-	margin-right: 45px;
-	width: 100px;
+	margin-right: 10px;
+	width: 110px;
+}
+#gefundeneHeader .bewertung{
+	width: 70px;
 }
 
 
@@ -103,11 +106,10 @@ textarea:hover{
 .gefundeneUeberschrift .gedundenerTitel { width: 260px; min-height: 1px; margin-right: 25px; }
 .gefundeneUeberschrift .gefundenerSpielbereich { width: 80px; min-height: 1px; margin-right: 30px;}
 .gefundeneUeberschrift .gefundeneBuildauslegung{ margin-right: 30px; width: 100px; min-height: 1px; }
-.gefundeneUeberschrift .gefundeneKlasse{ margin-left: 10px; margin-right: 45px; width: 30px; min-height: 1px; }
-.gefundeneUeberschrift .gefundeneHaupthand{ margin-right: 5px; width: 50px; min-height: 1px; } 
-.gefundeneUeberschrift .gefundeneBegleithand{ margin-right: 25px; width: 50px; min-height: 1px; }
-.gefundeneUeberschrift .gefundeneHaupthandOff{ margin-right: 5px; width: 50px; min-height: 1px; } 
-.gefundeneUeberschrift .gefundeneBegleithandOff{ margin-right: 35px; width: 50px; min-height: 1px; }
+.gefundeneUeberschrift .gefundeneKlasse{ margin-left: 10px; margin-right: 15px; width: 30px; min-height: 1px; }
+.gefundeneUeberschrift .gefundeneWaffenset{ margin-right: 30px; width: 90px; min-height: 1px; text-align: center;}
+.gefundeneUeberschrift .gefundeneWaffensetOff{ margin-right: 30px; width: 90px; min-height: 1px; text-align: center;} 
+.gefundeneUeberschrift .gefundeneBewertung{ margin-right: 5px; width: 65px; min-height: 1px; text-align: center;} 
 
 .gefundeneUeberschrift{
 	padding-top: 10px;
@@ -125,8 +127,12 @@ textarea:hover{
 	text-align: right;
 }
 .inhaltBeschreibung{
-	width: 740px;
+	width: 650px;
 	margin-bottom: 8px;
+}
+
+.bewertung:hover{
+	cursor: pointer;
 }
 
 /* Meldungen */
@@ -168,9 +174,9 @@ textarea:hover{
 /* Buttons */
 .button{
 	  background: #eee !important;
-	  border: 1px solid #aaa;
-	  border-top: 1px solid #ccc;
-	  border-left: 1px solid #ccc;
+	  border: 1px solid #aaa !important;
+	  border-top: 1px solid #ccc !important;
+	  border-left: 1px solid #ccc !important;
 	  padding: 4px 12px;
 	  border-radius: 3px !important;
 	  color: #444 !important;
@@ -252,7 +258,7 @@ legend {
 		font-size: 13px;  
 }
 #createBuild select,
-#editBuild select {	width: 220px; }
+#editBuild select {	width: 140px; }
 input[type="checkbox"] {
 		display: inline; }
 label span,
@@ -269,11 +275,10 @@ legend span {
 div.createTitel,
 div.createKlasse,
 div.createSpielbereich,
-div.createHaupthand,
-div.createBegleithand,
-div.createHaupthandOff{
+div.createBuildauslegung,
+div.createWaffenset{
 	float:left; 
-	margin-right: 20px;
+	margin-right: 40px;
 }
 .createLink{
 	float: right;
@@ -303,19 +308,86 @@ div.createHaupthandOff{
 	max-width: 13px;
 }
 
-/* Ausblenden bis realisiert */
-.inhaltKlicks,
-#editBuild .gefundeneKlasse, 
-#editBuild .gefundeneHaupthand, 
-#editBuild .gefundeneBegleithand, 
-#editBuild .gefundeneHaupthand,
-#editBuild .gefundeneBegleithand,
-div.searchContainer
-{
-	display: none;
+.mainHeadline{
+	margin-bottom: 20px; 
+}
+.mainHeadline h2 {
+	font-size: 34px;
+	font-weight: bold;
 }
 
+.breadcrumbs {
+	visibility: hidden;
+}
 
+/* Mobile Version */
+@media only screen and (max-width: 800px) { 
+    
+    .ml250{ margin-left: 25px}
+    div.createTitel,
+	div.createKlasse,
+	div.createSpielbereich,
+	div.createBuildauslegung,
+	div.createWaffenset,
+	div.createLink,
+	div.createBeschreibung,
+	.inhaltBeschreibung{
+		clear: both; 
+		margin-right: 0;
+		width: 99%;
+		padding-left: 1%; 
+	}
+	#createBuild select,
+	#editBuild select,
+	input[type="text"],
+	input[type="password"],
+	input[type="email"],
+	textarea
+	{	width: 100%; }
+	
+	#filter_inhalt div.filter_Spielbereich, 
+	#filter_inhalt div.filter_Buildauslegung, 
+	#filter_inhalt div.filter_Klasse, 
+	#filter_inhalt div.filter_Haupthand,
+	#filter_inhalt div.filter_Waffenset,
+	#filter select {
+		margin-right: 0;
+		margin-bottom: 5px;
+		width: 100%;
+	}
+	
+	#filter { height: 180px; }
+	
+	
+	.gefundeneBewertung{
+		margin-right: 0 !important;
+		width: 30px !important;
+	}
+	.gefundeneKlasse {
+		margin-right: 0 !important; 
+	}
+	
+	#actions .button {
+	 padding: 4px 2px !important; 
+	 margin : 0 2px !important; 
+	}
+
+	.gefundeneWaffenset,
+	.gefundeneWaffensetOff,
+	#editBuild .gefundeneKlasse,
+	#gefundeneHeader .haupthand,
+	#gefundeneHeader .begleithand,
+	.spielbereich,
+	.buildauslegung,
+	.gefundenerSpielbereich,
+	.gefundeneBuildauslegung,
+	#gefundeneHeader .bewertung,
+	.modal-backdrop.fade.in {
+		display: none; 
+	}
+    
+}
+/* Mobile Version END */
 		
 /*!
  * Bootstrap v3.0.2

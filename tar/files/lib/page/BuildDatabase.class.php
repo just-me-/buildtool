@@ -154,7 +154,7 @@ class BuildDatabase
 					<div class="gefundeneKlasse floatleft"><img title="' . $row['klasse'] . '" src="wcf/icon/' . $classFile . '.png" alt="' . $row['klasse'] . '"</img></div>
 					<div class="gefundeneWaffenset floatleft">' . $waffensetIcon . '</div>
 					<div class="gefundeneWaffensetOff floatleft">' . $waffensetOffIcon . '</div>
-					<div class="gefundeneBewertung floatleft">' . $bewertungsTag . '</div>
+					<div class="gefundeneBewertung floatright">' . $bewertungsTag . '</div>
 				</div>
 					
 				<div id="build_' . $row['id'] . '" class="collapse">
@@ -229,7 +229,7 @@ class BuildDatabase
 					</div>
 					<div class="gefundeneKlasse floatleft"><img title="' . $row['klasse'] . '" src="wcf/icon/' . $classFile . '.png" alt="' . $row['klasse'] . '"</img></div>
 					<div class="gefundeneWaffenset floatleft">' . $row['waffenset'] . '</div>
-					<div class="gefundeneWaffenset floatleft">' . $row['waffensetoff'] . '</div>
+					<div class="gefundeneWaffensetOff floatleft">' . $row['waffensetoff'] . '</div>
 					<div class="gefundenesErstelldatum floatright">'. $row['erstellungsdatum'] .'</div>
 				</div>
 					
@@ -237,7 +237,7 @@ class BuildDatabase
 					<div class="gefundenerInhalt">
 						<div class="createTitel">
 									<label>Kurzbeschreibung</label>
-									<input type="text" size="40" maxlength="45" name="editTitel" value="'. $row['titel'] . '"> 
+									<input type="text" size="40" maxlength="38" name="editTitel" value="'. $row['titel'] . '"> 
 								</div>
 								<div class="createLink">
 									<label>Link zum Build</label>
@@ -251,8 +251,8 @@ class BuildDatabase
 								<div class="createKlasse">'. $createKlasse->getSelectedDropdown("edit", $row['klasse']) .'</div>
 								<div class="createSpielbereich">'. $createSpielbereich->getSelectedDropdown("edit", $row['spielbereich']) .'</div>
 								<div class="createBuildauslegung">'. $createBuildauslegung->getSelectedDropdown("edit", $row['buildauslegung']) .'</div>
-								<div class="createWaffenset clear">'. $createWaffenset->getSelectedDropdownWithName("edit", "Waffenset", $row['waffenset']) .'</div>
-								<div class="createWaffenset clear">'. $createWaffensetOff->getSelectedDropdownWithName("edit", "WaffensetOff", $row['waffensetoff']) .'</div>
+								<div class="createWaffenset">'. $createWaffenset->getSelectedDropdownWithName("edit", "Waffenset", $row['waffenset']) .'</div>
+								<div class="createWaffensetOff">'. $createWaffensetOff->getSelectedDropdownWithName("edit", "WaffensetOff", $row['waffensetoff']) .'</div>
 								
 								<div class="buttons clear">
 									<input name="safeEditedBuild" class="button" type="submit" value="Änderungen speichern">

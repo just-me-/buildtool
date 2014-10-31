@@ -20,7 +20,7 @@ class EsoBuildsearchPage extends AbstractPage
     public $templateName = 'EsoBuildsearch';
 	
 	private $siteName="ESO Buildsuche";
-	private $siteBeschreibung="Realisation durch @Just_Merlin/Marcel H.";
+	private $siteBeschreibung="Realisation durch <b>@Just_Merlin/Marcel H.</b>";
 	
 	public function readData() 
 	{
