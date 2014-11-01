@@ -161,7 +161,7 @@ class BuildDatabase
 					<div id="build_' . $row['id'] . '_" class="gefundenerInhalt">
 						<form action="/index.php/EsoBuildsearch/" method="POST">
 							<input class="hidden" name="thisBuildID" value="' . $row['id'] . '" readonly="readonly">
-							<div class="inhaltBeschreibung floatleft"><p><strong>Beschreibung: </strong>' . $row['beschreibung'] . '</p></div>
+							<div class="inhaltBeschreibung floatleft"><p><strong>Beschreibung: </strong>' . nl2br($row['beschreibung']) . '</p></div>
 							<div class="infoBox floatright">
 								<div class="inhaltAutor"><p><strong>Autor: </strong>' . $row['autor'] . '</p></div>
 								<div class="inhaltErtstellungsdatum"><p><strong>Erstellt am: </strong>' . $row['erstellungsdatum'] . '</p></div>
@@ -245,7 +245,7 @@ class BuildDatabase
 								</div>
 								<div class="createBeschreibung">
 									<label>Ausführliche Beschreibung</label>
-									<textarea name="editBeschreibung" cols="50" rows="10" maxlength="9950">' . $row["beschreibung"] . '</textarea>
+									<textarea name="editBeschreibung" cols="50" rows="10" maxlength="9950">' . nl2br($row["beschreibung"]) . '</textarea>
 								</div>
 								
 								<div class="createKlasse">'. $createKlasse->getSelectedDropdown("edit", $row['klasse']) .'</div>
@@ -280,17 +280,17 @@ class BuildDatabase
 			}
 			/* htmlentities wurde wieder entfernt */
 			if(!empty($_POST['createTitel'])){
-				$titel = strip_tags($_POST['createTitel']);
+				$titel = addslashes(strip_tags($_POST['createTitel']));
 			} else{ 
 				return "Build wurde nicht erstellt; bitte eine Kurzbeschreibung angeben."; 
 			}
 			if(!empty($_POST['createBeschreibung'])){
-				$beschreibung = strip_tags($_POST['createBeschreibung']);
+				$beschreibung = addslashes(strip_tags($_POST['createBeschreibung']));
 			} else{ 
 				return "Build wurde nicht erstellt; bitte eine Beschreibung angeben."; 
 			}
 			if(!empty($_POST['createLink'])){
-				$link = strip_tags($_POST['createLink']);
+				$link = addslashes(strip_tags($_POST['createLink']));
 			} else{ 
 				return "Build wurde nicht erstellt; bitte einen Link angeben."; 
 			}
@@ -346,17 +346,17 @@ class BuildDatabase
 			if($check == true)
 			{	
 				if(!empty($_POST['editTitel'])){
-					$titel = strip_tags($_POST['editTitel']); 
+					$titel = addslashes(strip_tags($_POST['editTitel'])); 
 				} else{ 
 					return "Build wurde nicht erstellt; bitte eine Kurzbeschreibung angeben."; 
 				}
 				if(!empty($_POST['editBeschreibung'])){
-					$beschreibung = strip_tags($_POST['editBeschreibung']);
+					$beschreibung = addslashes(strip_tags($_POST['editBeschreibung']));
 				} else{ 
 					return "Build wurde nicht erstellt; bitte eine Beschreibung angeben."; 
 				}
 				if(!empty($_POST['editLink'])){
-					$link = strip_tags($_POST['editLink']);
+					$link = addslashes(strip_tags($_POST['editLink']));
 				} else{ 
 					return "Build wurde nicht erstellt; bitte einen Link angeben."; 
 				}
