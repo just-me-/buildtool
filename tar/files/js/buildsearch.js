@@ -1,4 +1,4 @@
-function getVote(this){
+function getVote(myElement){
 
 	// count voteing up
 	// chance icon to glow normal

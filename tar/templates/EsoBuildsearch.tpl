@@ -163,7 +163,12 @@
         </div>
 		{include file='footer' sandbox=false}
 		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  		<script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 		<script src="wcf/bs/bootstrap.js" type="text/javascript"></script>
 		<script src="wcf/js/buildsearch.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+		<script>
+			$( document ).tooltip({ position: { my: "left+15 center", at: "right center" } });
+		</script>
     </body>
 </html>
