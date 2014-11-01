@@ -1,3 +1,13 @@
+/* fix legendary style */
+#topMenu.userPanel,
+.navigation.navigationHeader,
+#footerNavigation.navigation.navigationFooter {
+	width: 100% !important; 
+	padding: 0 !important;
+}
+/* end fix */
+
+
 #content {
 	background: #D8D8D8 !important;
 	background: -moz-linear-gradient(left, #fff 0%, #D8D8D8 40%, #D8D8D8 60%, #fff 100%) !important;
@@ -396,10 +406,20 @@ div.createWaffenset{
 	.gefundenerSpielbereich,
 	.gefundeneBuildauslegung,
 	#gefundeneHeader .bewertung,
-	.modal-backdrop.fade.in {
+	.modal-backdrop.fade.in,
+	#search,
+	.copyright {
 		display: none; 
 	}
     
+}
+@media only screen and (max-width: 400px) { 
+	.ml250,
+	.klasse,
+	.gefundeneKlasse,
+	.gefundeneBewertung{
+		display: none; 
+	}
 }
 /* Mobile Version END */
 		

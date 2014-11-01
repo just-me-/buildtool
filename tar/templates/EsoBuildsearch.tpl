@@ -30,7 +30,6 @@
             
 			<div id="myMain">
 				{@$myChance}
-				<div id="jsInfoBox" class="fehlerBox" style="display: none;">Dummy Error</div>
 				<div id="actions">
 					<div class="floatleft">
 						<!-- <a class="button" href="javascript:toggle('createBuild')">Neues Build erstellen</a> -->
@@ -163,7 +162,6 @@
 		 </div>
         </div>
 		{include file='footer' sandbox=false}
-		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   		<script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 		<script src="wcf/bs/bootstrap.js" type="text/javascript"></script>
 		<script src="wcf/js/buildsearch.js" type="text/javascript"></script>
