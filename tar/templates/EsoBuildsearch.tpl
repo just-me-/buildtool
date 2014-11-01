@@ -30,6 +30,7 @@
             
 			<div id="myMain">
 				{@$myChance}
+				<div id="jsInfoBox" class="fehlerBox" style="display: none;">Dummy Error</div>
 				<div id="actions">
 					<div class="floatleft">
 						<!-- <a class="button" href="javascript:toggle('createBuild')">Neues Build erstellen</a> -->

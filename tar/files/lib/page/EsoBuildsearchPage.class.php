@@ -99,7 +99,7 @@ class EsoBuildsearchPage extends AbstractPage
 		} 
 		
 		$myCreateForm = '
-			<form action="/index.php/EsoBuildsearch/" method="POST">
+			<form action="/index.php/EsoBuildsearch/" onsubmit="return validateNewBuild()" method="POST">
 				<div class="createTitel">
 					<label>Kurzbeschreibung</label>
 					<input type="text" size="40" maxlength="45" name="createTitel" value="' . $valueTitel . '"> 

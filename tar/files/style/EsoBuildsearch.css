@@ -25,6 +25,7 @@ textarea:hover{
 .floatright { float: right; display: block;}
 .clear { clear: both; display: block;}
 .hidden{ display: none; }
+.ml250 {margin-left: 250px;}
 
 #myMain{ background-color: #FFFFFF; }
 
@@ -318,6 +319,19 @@ div.createWaffenset{
 
 .breadcrumbs {
 	visibility: hidden;
+}
+
+.errorVal {
+	border-color: #843534 !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483 !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483 !important;
+    background-color: #ffffff !important; 
+}
+
+.errorVal:focus {
+    border-color: #a94442 !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075) !important;
 }
 
 /* Mobile Version */
