@@ -116,13 +116,13 @@ class BuildDatabase
 				}
 			}
 			// ajax js - glow more on rollover; send on click 
+			$icon = "Veteran.png"; 
 			if($like_counter == 0) {
 				$alt_text = "Sei der Erste, dem dieses Build gefällt! "; 
 			} else {
 				$alt_text = "Dieser Beitrag gefällt ".$like_counter." Personen. "; 
 				if ($user_likes == 0) {
 					$alt_text .= "Gefällt er dir auch?";
-					$icon = "Veteran.png"; 
 				} else {
 					$alt_text .= "Dir auch. Magst du es nicht mehr?";
 					$icon = "Veteran_glow.png"; 
@@ -216,6 +216,35 @@ class BuildDatabase
 			$createWaffenset = new Dropdown('Hauptwaffensatz', $arrayWaffenset);
 			$createWaffensetOff = new Dropdown('Nebenwaffensatz', $arrayWaffenset);
 			
+			$waffensetIcon = $row['waffenset']; 
+			$waffensetIconOff = $row['waffensetoff']; 
+			
+			if ($waffensetIcon == "Zerstörungsstab") {
+				$waffensetIcon = "Zerstoerungsstab"; 
+			}
+			if ($waffensetIcon == "Zweihänder") {
+				$waffensetIcon = "Zweihaender"; 
+			}
+			if ($waffensetIcon == "Einhand mit Schild") {
+				$waffensetIcon = "Einhand_mit_Schild"; 
+			}
+			if ($waffensetIconOff == "Zerstörungsstab") {
+				$waffensetIconOff = "Zerstoerungsstab"; 
+			}
+			if ($waffensetIconOff == "Zweihänder") {
+				$waffensetIconOff = "Zweihaender"; 
+			}
+			if ($waffensetIconOff == "Einhand mit Schild") {
+				$waffensetIconOff = "Einhand_mit_Schild"; 
+			}
+			
+			if(!empty( $row['waffenset'])){
+				$waffensetIcon = '<img title="' . $row['waffenset'] . '" src="wcf/icon/' . $waffensetIcon . '.png" alt="' . $row['waffenset'] . '"</img>';
+			} else { $waffensetIcon = ""; }
+			if(!empty( $row['waffensetoff'])){
+				$waffensetOffIcon = '<img title="' . $row['waffensetoff'] . '" src="wcf/icon/' . $waffensetIconOff . '.png" alt="' . $row['waffensetoff'] . '"</img>';
+			} else { $waffensetOffIcon = ""; }
+			
 			$counter++;
 			$classFile = $row['klasse'];
 			$builds .= '
@@ -228,8 +257,8 @@ class BuildDatabase
 						<a class="collapsed" data-toggle="collapse" data-parent="#myMain" href="#myBuild_' . $row['id'] . '">' . $row['titel'] . '</a>
 					</div>
 					<div class="gefundeneKlasse floatleft"><img title="' . $row['klasse'] . '" src="wcf/icon/' . $classFile . '.png" alt="' . $row['klasse'] . '"</img></div>
-					<div class="gefundeneWaffenset floatleft">' . $row['waffenset'] . '</div>
-					<div class="gefundeneWaffensetOff floatleft">' . $row['waffensetoff'] . '</div>
+					<div class="gefundeneWaffenset floatleft">' . $waffensetIcon . '</div>
+					<div class="gefundeneWaffensetOff floatleft">' . $waffensetOffIcon . '</div>
 					<div class="gefundenesErstelldatum floatright">'. $row['erstellungsdatum'] .'</div>
 				</div>
 					

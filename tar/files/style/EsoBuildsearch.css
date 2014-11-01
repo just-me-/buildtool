@@ -269,7 +269,7 @@ legend {
 		font-size: 13px;  
 }
 #createBuild select,
-#editBuild select {	width: 140px; }
+#editBuild select {	width: 170px; }
 input[type="checkbox"] {
 		display: inline; }
 label span,
@@ -289,7 +289,7 @@ div.createSpielbereich,
 div.createBuildauslegung,
 div.createWaffenset{
 	float:left; 
-	margin-right: 40px;
+	margin-right: 5px;
 }
 .createLink{
 	float: right;
