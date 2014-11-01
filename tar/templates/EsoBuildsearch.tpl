@@ -53,60 +53,61 @@
 							  <div class="modal-body">
 								<h3>Was ist das?</h4>
 								<p>
-								Herzlich willkommen zur Buildsuche von Abaddons Mund!<br/>
+								Herzlich willkommen zur Buildsuche von Legendary!<br/>
 								Dieses Programm ist dazu gedacht, Builds zentral zu sammeln. Benutzer können ihre Builds erstellen, sich von andere Inspirationen holen, 
-								Tips und Tricks in Kommentaren weitergeben oder einfach stöbern; welche Builds sind auf unserem Server besonders beliebt. <br/> 
+								oder einfach stöbern; welche Builds sind in unserer Gilde besonders beliebt. <br/> 
 								Dieses Tool ist <b>nicht</b> dazu gedacht, ein eigenständiger Buildeditor zu werden. Hier soll jeweils lediglich ein Link auf entsprechende Editoren-Seiten eingebunden werden.
-								(Zum Beispiel von de.gw2skills.net)
+								(Zum Beispiel von elderscrollsbote.de/planer/)
 								</p>
 								
 								<h3>Work in progress</h4>
 								<p>
-								Bestimmt schon ein verhasster Satz unter Gw2 Spielern. 
-								Hier einzelne 2Do's: <br/>
+								Hier einzelne 2Do's, welche teils schon halbwegs implementiert sind und andere, die erst auf der Planungsliste stehen: <br/>
 								</p>
 								
-								<h4>Kommentare und Bewertungen</h4>
+								<h4>Like-Funktion</h4>
 								<p>
-								Wie Dir bestimmt schon aufgefallen ist, gibt es eine Spalte mir Bewertungspunkten. Momentan ist eine fixe Zahl eingetragen - lass Dich nicht verwirren. 
-								Die restliche Mechanik wurde bereits realisiert. Zusammen mit dem Feature der Kommentare, soll das dynamische Berechnen demnächst implementiert werden. 
-								Jedem Benutzer soll es ermöglicht werden, einen Kommentar (bzw. Bewertung) für einzelne Builds zu verfassen. 
-								Ab einer gewissen Anzahl negativer Kommentare, wird ein Build automatisch aus der Datenbank entfernt. Dies soll die Moderation entlasten. <br/>
-								Anderst als bei den Builds wird eine Überarbeitung des Kommentars ausgeschlossen sein. 
-								Ob und von wem Kommentare gelöscht werden können, ist noch offen. 
-								Zusammen mit diesen Extras wird auch die Sortierung der Buildauflistung überarbeitet. 
+								Diese Funktion ist teils schon integriert. Es soll die Möglichkeit gegeben werden, über eine Like-Funktion (das Veteran-Icon)
+								Builds positiv zu bewerten. Eine Kommentar und Bewertungsfunktion wird es in dem Sinne aber nicht geben. <br/>
+								Dies soll über Ajax umgesetzt werden um das Benutzererlebnis zu optimieren. (Auch könnte das Filtermenü als Ajax-Schnittstelle umgeschrieben werden.)
 								</p>
 								
-								<h4>Anzahl Klicks</h4>
+								<h4>CSS</h4>
 								<p>
-								Es soll ersichtlich sein, wie oft ein Build schon angeklickt wurde. Entsprechend soll das Ranking angepasst werden. Das Grundgerüst für diese Funktion wurde schon erstellt - jedoch wieder ausgeblendet. 
-								Momentan ist es nicht möglich, einen Counter hoch zu zählen, ohne dass im Hintergrund die Seite nochmals neu geladen wird. 
-								Aufgrund der Einbuse dieses (teils sehr grossen) Ärgernisses, wurde dies momentan auf Eis gelegt. 
+								Zur Zeit ist das Tool noch in Gw2 Farben gehalten. Das kommt davon, dass ich es ursprünglich damals für eine Gw2-Community grob erstellt hatte. <br/>
+								Die zur Zeit etwas hellen Farben im Vergleich zum restlichen Forum sollen etwas besser angegliedert werden - ein angepasstes Design eben. 
 								</p>
 								
-								<h4>JavaScript</h4>
+								<h4>Mehr Optionen</h4>
 								<p>
-								Momentan wird nur eine serverseitige Valedierung verwendet. Eine clientseitige soll jedoch demnächst folgen. 
-								Aufgrund der beiden Kombinationen kann es möglich sein, dass sich Fehler einschleichen (oder bereits in der serverseitigen Valedierung eingeschlichen haben.)
-								Falls es eine Buildkonstelation gibt, welche möglich sein sollte; jedoch vom Programm verweigert wird - oder das Programm eine Waffenwahl zulässt, 
-								die eigentlich nicht möglich sein sollte, so meldet dies bitte möglichst rekonstruierbar. 
-								<br/>
-								Zusätzlich sollen Infoboxen implementiert werden. (Vorallem für die Waffensetz wird es einen Rollover geben, wodurch die Darstellung benutzerfreundlicher gestaltet werden soll. 
-								Teils sind die Icons wirklich etwas klein; momentan ist ein kleinflächiger "Standart-Rollover" eingebunden.) 
+								Zur Zeit sind Grundangaben möglich wie Klasse und Waffen. Je nach Feedback können weitere Kriterien wie "ist Vampir", Art der Rüstungsteile, Nahrung uns so weiter impelemtiert werden. <br/>
+								Grundsätzlich können diese Informationen bereits in der Beschreibung weiter gegeben werden. Ausserdem sind sie auch im externen Buildplaner enthalten. Es bleibt abzuwiegen, 
+								wie sinnvoll solche Erweiterungen wären wenn man den Gedanken beibehält, nicht als eigenständiges Tool auftreten zu wollen. 
+								</p>
+								
+								<h4>Fork me</h4>
+								<p>
+								Die Lizenz soll später geändert werden, dass Forks erlaubt sind. Zuvor muss jedoch die Datenbank normalisiert werden und der Code grundlegend ausgemistet werden. <br/>
+								Zur Zeit war es jedoch genug Aufwand, das Tool für die neue Software WBB4 bzw. das Framework WCF 2.0.x umzuschreiben, da das Gw2 Forum noch die alte Version hatte. 
+								</p>
+								
+								<h4>Icons</h4>
+								<p>
+								Zum einen sollen die Icons erneuert werden und zum andern sollen die vielen Selects durch Icons teils abgelöst werden für mehr Benutzerfreundlichkeit. <br/>
+								Zur Zeit sind die Logos auch noch von Gw2. Es gilt folgendes erklärt: <i>Ich habe keine Ansprüche oder andere Formen von Eigentum bezüglich der Inhalte von ArenaNet oder ZeniMax.</i>
 								</p>
 								
 								<h4>Teilen</h4>
 								<p>
-								Damit Du Builds Freunden weiterempfehlen  oder in einem Forumpost verlinken kannst, soll es eine Funktion geben, die durch einen Klick einen generierten Link in deine Zwischenablage legt. 
+								Damit Du Builds Freunden weiterempfehlen oder in einem Forumpost verlinken kannst, soll es eine Funktion geben, die durch einen Klick einen generierten Link in deine Zwischenablage legt. 
 								Wird dieser aufgerufen, wird automatisch das entsprechende Build geöffnet und fokusiert. 
 								</p>
 								
-								<h3>Kontakt</h4>
+								<h3>Kontakt</h3>
 								<p>
-								Da dieses Tool für <i>Euch</i> entwickelt wurde, wäre es schön, ihr tut eurer Meinung kund im entsprechendem Therad. Hier der Link: <a href="http://www.abaddons-mund.eu/index.php?page=Thread&threadID=319">BETA BuildSearch-Tool</a><br/>
+								Da dieses Tool für <i>Euch</i> entwickelt wurde, wäre es schön, ihr tut eurer Meinung kund im entsprechendem Therad. Hier der Link: <a href="http://www.gilde-legendary.de/index.php/Thread/14906-BuildSearchTool/?postID=79273#post79220">BETA BuildSearch-Tool</a><br/>
 								Das momentane Plugin soll auf eure Bedürfnisse zugeschnitten sein - so, dass es <i>wirklich brauchbar</i> ist. 
-								Es wäre schade, man würde das Tool nicht verwenden, nur weil es den Ansprüchen nicht gerecht wird. <br/>
-								Gerne kann man mich auch direkt im Spiel erreichen; <b>Merlin.6750</b>. <br/><br/>
+								Es wäre schade, man würde das Tool nicht verwenden, nur weil es den Ansprüchen nicht gerecht wird. <br/><br/>
 								Ich freue mich auf Deine Anregungen!<br/>
 								Gruss, Marcel
 								</p>

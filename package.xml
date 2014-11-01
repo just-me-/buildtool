@@ -7,7 +7,7 @@
         <packagedescription><![CDATA[ESO Buildsearch]]></packagedescription>
         <packagedescription language="de"><![CDATA[ESO Buildsuche]]></packagedescription>
         <packagedescription language="de-informal"><![CDATA[ESO Buildsuche]]></packagedescription>
-        <version>1.0.31</version>
+        <version>1.0.32</version>
         <date>2014-10-18</date>
         <standalone>0</standalone>
         <isunique>1</isunique>
