@@ -26,7 +26,7 @@ class BuildValidate
 	
 	public function checkBuildauslegung($buildauslegung)
 	{
-		$arrayBuildauslegung = array(0 => 'Schaden', 1 => 'Support/Tank', 2 => 'Heilung');
+		$arrayBuildauslegung = array(0 => 'Schaden', 1 => 'Schaden/Heilung', 2 => 'Support/Tank', 3 => 'Heilung', 4 => 'Heilung/Schaden');
 		if (in_array($buildauslegung, $arrayBuildauslegung)) {
 			return true; 
 		}

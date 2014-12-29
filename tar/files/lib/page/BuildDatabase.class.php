@@ -209,7 +209,7 @@ class BuildDatabase
 		
 		/* tmp */
 		$arraySpielbereich = array(0 => 'AvA', 1 => 'PvE', 2 => 'Bi-Auslegung');
-		$arrayBuildauslegung = array(0 => 'Schaden', 1 => 'Support/Tank', 2 => 'Heilung');
+		$arrayBuildauslegung = array(0 => 'Schaden', 1 => 'Schaden/Heilung', 2 => 'Support/Tank', 3 => 'Heilung', 4 => 'Heilung/Schaden');
 		$arrayKlasse = array(0 => 'Drachenritter', 1 => 'Nachtklinge', 2 => 'Templer', 3 => 'Zauberer');
 		$arrayWaffenset = array(0 => 'Zweihänder', 1 => 'Beidhändig', 2 => 'Einhand mit Schild', 3 => 'Bogen', 
 		4 => 'Zerstörungsstab', 5 => 'Wiederherstellungsstab');
