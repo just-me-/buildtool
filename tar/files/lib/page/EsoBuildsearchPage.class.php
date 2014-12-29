@@ -144,6 +144,7 @@ class EsoBuildsearchPage extends AbstractPage
 		$myResult = $anbindung->setNewBuild();
 		$myResult .= $anbindung->setEditBuild();
 		$myResult .= $anbindung->deleteBuild();
+		$myResult .= $anbindung->likeBuild();
 		
 		$myChance = "";
 		if(!empty($myResult)){

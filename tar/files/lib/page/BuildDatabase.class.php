@@ -135,13 +135,14 @@ class BuildDatabase
 					$icon = "Veteran_glow.png"; 
 				}
 			} 
-			
+			$like_counter_hidden = $like_counter; 
 			if ($like_counter == 0) {
 				$like_counter = ""; 
 			}
-			$bewertungsTag = '<span class="v_lvl">'.$like_counter.'</span><img class="bewertung" title="' . $alt_text . '" src="wcf/icon/' . $icon . '" 
-				alt="' . $alt_text . '" onmouseout="src=\'wcf/icon/' . $icon . '\'" onmouseover="src=\'wcf/icon/Veteran_glow_more.png\'" </img>'; 
-			$javascript_events = 'onclick="getVote(this)"'; 
+			$bewertungsTag = '<span id="v_counter_'.$row['id'].'" class="v_lvl">'.$like_counter.'</span><img id="v_img_'.$row['id'].'" class="bewertung" title="' . $alt_text . '" src="wcf/icon/' . $icon . '" 
+				alt="' . $alt_text . '" onmouseout="icon_out(this, '.$row['id'].')" onmouseover="src=\'wcf/icon/Veteran_glow_more.png\'" </img>'; 
+			$hiddenLikeValues = '<input type="hidden" name="userlikethis_'.$row['id'].'" value="' . $user_likes . '">';
+			$hiddenLikeValues .= '<input type="hidden" name="userlikes_'.$row['id'].'" value="' . $like_counter_hidden . '">';
 		
 			if( 0 < substr_count($row['link'], 'http')){
 				$thisLink = $row['link'];
@@ -161,7 +162,7 @@ class BuildDatabase
 					<div class="gefundeneKlasse floatleft"><img title="' . $row['klasse'] . '" src="wcf/icon/' . $classFile . '.png" alt="' . $row['klasse'] . '"</img></div>
 					<div class="gefundeneWaffenset floatleft">' . $waffensetIcon . '</div>
 					<div class="gefundeneWaffensetOff floatleft">' . $waffensetOffIcon . '</div>
-					<div class="gefundeneBewertung floatright">' . $bewertungsTag . '</div>
+					<div class="gefundeneBewertung floatright" onclick="likeBuild(this, '.$row['id'].')">' . $bewertungsTag . $hiddenLikeValues . '</div>
 				</div>
 					
 				<div id="build_' . $row['id'] . '" class="collapse">
@@ -478,6 +479,37 @@ class BuildDatabase
 			$statement->execute();
 			return "Build Nr. " . $_POST["thisBuildID"] . " wurde erfolgreich gelöscht.";
 			
+		}
+	}
+	
+	public function likeBuild()
+	{
+		if (isset($_GET["ajax"]) && isset($_GET["build"])) 
+		{ 
+			$user = WCF::getUser()->username;
+			if($user != ""){ 
+			
+				$check_sth = $this->zugriff->prepareStatement('SELECT * from eso_buildsearch_like WHERE buildid = '.$_GET["build"].' AND autor = \''.$user.'\''); 
+				$check_sth->execute();
+			
+				$user_likes = 0; 
+				while ($like_row = $check_sth->fetchArray()) {
+					$user_likes++;
+				}
+			
+				if($user_likes == 0) {
+					// like it
+					$curr_date = date("d.m.Y", time());
+					$like_up_sth = $this->zugriff->prepareStatement('INSERT INTO eso_buildsearch_like (buildid, autor, erstellungsdatum) VALUES ('.$_GET["build"].', \''.$user.'\', \''.$curr_date.'\')'); 
+					$like_up_sth->execute();
+				
+				} else {
+					// dislike
+					$like_down_sth = $this->zugriff->prepareStatement('DELETE FROM eso_buildsearch_like WHERE buildid = '.$_GET["build"].' AND autor = \''.$user.'\''); 
+					$like_down_sth->execute();
+				}
+				
+			}
 		}
 	}
 	

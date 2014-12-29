@@ -1,11 +1,61 @@
-function getVote(myElement){
+function likeBuild(myElement, id){
 
-	// count voteing up
-	// chance icon to glow normal
-	// send ajax request
+	var user_do_alrdy_like = $("input[name*='userlikethis_"+id+"']").val();
+	var likes = $("input[name*='userlikes_"+id+"']").val();
 	
-	// need span and img object
+	var hidden_likes = 0; 
+	var user_like_this = 0; 
+	var newText = ""; 
+	
+	// chance icon to glow / normal
+	// count up or down
+	if(user_do_alrdy_like == 1){
+		$("#v_img_"+id).attr("src","wcf/icon/Veteran.png");
+		v_counter_1
+		v_img_1
+		// count down
+		likes--; 
+		hidden_likes=likes; 
+		if(likes < 1){
+			likes = ""; 
+		}
+		newText = "Du magst diesen Beitrag nicht mehr.";
+		
+	} else {
+		user_like_this = 1; 
+		$("#v_img_"+id).attr("src","wcf/icon/Veteran_glow.png");
+		// count up
+		likes++; 
+		hidden_likes=likes; 
+		newText = "Du magst diesen Beitrag!";
+	}
+	$("#v_img_"+id).attr("title", newText);
+	$("#v_counter_"+id).text(likes);
+	$("input[name*='userlikethis_"+id+"']").val(user_like_this)
+	$("input[name*='userlikes_"+id+"']").val(hidden_likes)
+	
+	// send ajax request
+	$.ajax({
+		type: "GET",
+		url: "/index.php/EsoBuildsearch/",
+		data: {ajax: 1, build: id, user_like_this: user_like_this},
+		success: function(data) {
+			// $("#ajax_div").html(data);
+		},
+		error: function(data) {
+			// $("#ajax_div").html("fehler");
+		}
+	});
 
+}
+
+function icon_out(element, id){
+	var user_do_alrdy_like = $("input[name*='userlikethis_"+id+"']").val();
+	var icon = "wcf/icon/Veteran.png"; 
+	if(user_do_alrdy_like == 1) {
+		icon = "wcf/icon/Veteran_glow.png"; 
+	}
+	element.src = icon; 
 }
 
 function validateNewBuild(){
