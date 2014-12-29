@@ -10,6 +10,7 @@ CREATE TABLE eso_buildsearch_builds(
 	link varchar(995),
 	autor varchar(50),
 	erstellungsdatum varchar(10),
+	privatsstufe INTEGER,
 	PRIMARY KEY  (id)
 );
 

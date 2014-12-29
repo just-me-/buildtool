@@ -24,7 +24,7 @@ class BuildDatabase
 	public function __construct ()
 	{
 		 $this->zugriff = WCF::getDB();
-		 $this->adminID = 4;  /* ### Hier muss die Administrations ID vom CMS eingetragen werden ### */
+		 $this->adminID = 36;  /* ### Hier muss die Administrations ID vom CMS eingetragen werden ### */
 	}
 	
 	public function getBuilds()
@@ -79,6 +79,9 @@ class BuildDatabase
 			if ($waffensetIcon == "Zweihänder") {
 				$waffensetIcon = "Zweihaender"; 
 			}
+			if ($waffensetIcon == "Beidhändig") {
+				$waffensetIcon = "Beidhaendig"; 
+			}
 			if ($waffensetIcon == "Einhand mit Schild") {
 				$waffensetIcon = "Einhand_mit_Schild"; 
 			}
@@ -87,6 +90,10 @@ class BuildDatabase
 			}
 			if ($waffensetIconOff == "Zweihänder") {
 				$waffensetIconOff = "Zweihaender"; 
+			}
+			
+			if ($waffensetIconOff == "Beidhändig") {
+				$waffensetIconOff = "Beidhaendig"; 
 			}
 			if ($waffensetIconOff == "Einhand mit Schild") {
 				$waffensetIconOff = "Einhand_mit_Schild"; 
@@ -204,8 +211,8 @@ class BuildDatabase
 		$arraySpielbereich = array(0 => 'AvA', 1 => 'PvE', 2 => 'Bi-Auslegung');
 		$arrayBuildauslegung = array(0 => 'Schaden', 1 => 'Support/Tank', 2 => 'Heilung');
 		$arrayKlasse = array(0 => 'Drachenritter', 1 => 'Nachtklinge', 2 => 'Templer', 3 => 'Zauberer');
-		$arrayWaffenset = array(0 => 'Zweihänder', 1 => 'Einhand mit Schild', 2 => 'Bogen', 
-		3 => 'Zerstörungsstab', 4 => 'Wiederherstellungsstab');
+		$arrayWaffenset = array(0 => 'Zweihänder', 1 => 'Beidhändig', 2 => 'Einhand mit Schild', 3 => 'Bogen', 
+		4 => 'Zerstörungsstab', 5 => 'Wiederherstellungsstab');
 		/* tmp END */
 		$counter = 0;
 		while ($row = $statement->fetchArray()) {
@@ -225,6 +232,9 @@ class BuildDatabase
 			if ($waffensetIcon == "Zweihänder") {
 				$waffensetIcon = "Zweihaender"; 
 			}
+			if ($waffensetIcon == "Beidhändig") {
+				$waffensetIcon = "Beidhaendig"; 
+			}
 			if ($waffensetIcon == "Einhand mit Schild") {
 				$waffensetIcon = "Einhand_mit_Schild"; 
 			}
@@ -233,6 +243,9 @@ class BuildDatabase
 			}
 			if ($waffensetIconOff == "Zweihänder") {
 				$waffensetIconOff = "Zweihaender"; 
+			}
+			if ($waffensetIconOff == "Beidhändig") {
+				$waffensetIconOff = "Beidhaendig"; 
 			}
 			if ($waffensetIconOff == "Einhand mit Schild") {
 				$waffensetIconOff = "Einhand_mit_Schild"; 

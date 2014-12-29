@@ -40,8 +40,8 @@ class EsoBuildsearchPage extends AbstractPage
 		$arraySpielbereich = array(0 => 'alle', 1 => 'AvA', 2 => 'PvE', 3 => 'Bi-Auslegung');
 		$arrayBuildauslegung = array(0 => 'alle', 1 => 'Schaden', 2 => 'Support/Tank', 3 => 'Heilung');
 		$arrayKlasse = array(0 => 'alle', 1 => 'Drachenritter', 2 => 'Nachtklinge', 3 => 'Templer', 4 => 'Zauberer');
-		$arrayWaffenset = array(0 => 'alle', 1 => 'Zweihänder', 2 => 'Einhand mit Schild', 3 => 'Bogen', 
-		4 => 'Zerstörungsstab', 5 => 'Wiederherstellungsstab');
+		$arrayWaffenset = array(0 => 'alle', 1 => 'Zweihänder', 2 => 'Beidhändig', 3 => 'Einhand mit Schild', 4 => 'Bogen', 
+		5 => 'Zerstörungsstab', 6 => 'Wiederherstellungsstab');
 		
 		$filterSpielbereich = new Dropdown('Spielbereich', $arraySpielbereich);
 		$filterBuildauslegung = new Dropdown('Buildauslegung', $arrayBuildauslegung);
@@ -75,8 +75,8 @@ class EsoBuildsearchPage extends AbstractPage
 		$arraySpielbereich = array(0 => 'AvA', 1 => 'PvE', 2 => 'Bi-Auslegung');
 		$arrayBuildauslegung = array(0 => 'Schaden', 1 => 'Support/Tank', 2 => 'Heilung');
 		$arrayKlasse = array(0 => 'Drachenritter', 1 => 'Nachtklinge', 2 => 'Templer', 3 => 'Zauberer');
-		$arrayWaffenset = array(0 => 'Zweihänder', 1 => 'Einhand mit Schild', 2 => 'Bogen', 
-		3 => 'Zerstörungsstab', 4 => 'Wiederherstellungsstab');
+		$arrayWaffenset = array(0 => 'Zweihänder', 1 => 'Beidhändig', 2 => 'Einhand mit Schild', 3 => 'Bogen', 
+		4 => 'Zerstörungsstab', 5 => 'Wiederherstellungsstab');
 		
 		$createSpielbereich = new Dropdown('Spielbereich', $arraySpielbereich);
 		$createBuildauslegung = new Dropdown('Buildauslegung', $arrayBuildauslegung);
