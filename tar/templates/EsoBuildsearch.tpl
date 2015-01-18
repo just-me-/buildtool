@@ -2,7 +2,7 @@
     <head>
         <title>Buildsearch - {lang}{PAGE_TITLE}{/lang}</title>
         {include file='headInclude' sandbox=false}
-		<link rel="stylesheet" type="text/css" media="screen" href="wcf/style/EsoBuildsearch.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="wcf/style/EsoBuildsearch.css?v=1064">
 		<script type="text/javascript">
 		function toggle(control){
 			var elem = document.getElementById(control);

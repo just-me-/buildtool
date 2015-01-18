@@ -7,6 +7,29 @@
 }
 /* end fix */
 
+/* fix legendary mobile style */
+button.button,
+button.button:hover,
+::selection {
+	text-shadow: none !important; 
+}
+@media only screen and (max-width: 800px) { 
+	div#main{
+		background: #D8D8D8 !important;
+		background: -moz-linear-gradient(left, #fff 0%, #D8D8D8 40%, #D8D8D8 60%, #fff 100%) !important;
+		background: -webkit-gradient(linear, left top, right top, color-stop(0%, #fff), color-stop(40%, #D8D8D8), color-stop(60%, #D8D8D8), color-stop(100%, #fff)) !important;
+		background: -webkit-linear-gradient(left, #fff 0%, #D8D8D8 40%, #D8D8D8 60%, #fff 100%) !important;
+		background: -o-linear-gradient(left, #fff 0%, #D8D8D8 40%, #D8D8D8 60%, #fff 100%) !important;
+		background: -ms-linear-gradient(left, #fff 0%, #D8D8D8 40%, #D8D8D8 60%, #fff 100%) !important;
+		background: linear-gradient(left, #ffffff 0%,#D8D8D8 40%,#D8D8D8 60%,#ffffff 100%) !important;
+	}
+}
+/* end fix */
+
+.delAsAdmin {
+	display: none !important; 
+}
+
 
 #content {
 	background: #D8D8D8 !important;
